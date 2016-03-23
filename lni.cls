@@ -130,9 +130,8 @@
 \def\@maketitle{%
   \newpage
   \null
-  \begin{center}%
+  \begin{flushleft}%
   \vskip -24pt% Abstand vor dem Titel
-  \flushleft %Linksbündig
   \let \footnote \thanks
     {\fontsize{14}{17}\fontseries{b}\selectfont \@title \par}%
     \vskip 19pt% Abstand nach dem Titel
@@ -142,7 +141,7 @@
         \@author
       \par}%
     \vskip 28pt%Abstand vor dem Abstract
-  \end{center}%
+  \end{flushleft}%
   \par
   }
 

@@ -12,6 +12,9 @@ We refer to [GitHub issues](https://github.com/latextemplates/LNI/issues) by usi
 
 ### Changed
 
+#### lni.cls
+* Fix warning by package [nag](https://www.ctan.org/pkg/nag): \flushleft should not be used inside center environment
+
 #### paper.tex
 * Renamed from lniguide.tex
 * Move many text to comments
