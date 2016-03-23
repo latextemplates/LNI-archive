@@ -1,224 +1,289 @@
+% Currently this document is written in German
+% !TeX spellcheck = de_DE
+
+%Ensure that all odl school LaTeX habits are remarked
+\RequirePackage[l2tabu, orthodox]{nag}
+%Neue deutsche Trennmuster
+%Siehe http://www.ctan.org/pkg/dehyph-exptl und http://projekte.dante.de/Trennmuster/WebHome
+%Nur für pdflatex, nicht für lualatex
+\RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
 \documentclass{lni}
-% in englisch stattdessen:
+% in Englisch stattdessen:
 %\documentclass[english]{lni}
 
-\IfFileExists{latin1.sty}{\usepackage{latin1}}{\usepackage{isolatin1}}
+
+
+
+
+
+
+%% Some packages, no need to be adabted
+
+% enable copy and paste of ligatures (e.g., in "workflow" and umlauts)
+\usepackage{cmap}
+
+%Überschrift des Literaturverzeichnisses
+%Only in German
+\iflnienglish
+\else
+\renewcommand{\refname}{Literaturverzeichnis}
+\fi
+
+%Enable input of umlauts. Change to UTF-8 if you use UTF-8
+\usepackage[latin1]{inputenc}
 
 \usepackage{graphicx}
+
 \usepackage{fancyhdr}
-\usepackage{listings} %if lstlistings is used
-\usepackage{changepage} %for changing topmargin on first page
-\usepackage[figurename=Abb., tablename=Tab., small]{caption}[2008/04/01]
-\renewcommand{\lstlistingname}{List.}    % Listingname heißt nun List. 
+
+%Kopf- und Fußzeileneinstellungen
+\fancypagestyle{lnifirstpage}{
+% Löscht alle Kopf- und Fußzeileneinstellungen
+\fancyhf{}
+
+%Kopfzeile
+\fancyhead[RO]{\small Einreichung für: <Konferenz/Workshop>,\linebreak%
+Geplant als Veröffentlichung innerhalb der Lecture Notes in Informatics (LNI)
+}
+%Für den Herausgeber:
+%\fancyhead[RO]{\small <Vorname Nachname [et. al.]> (Hrsg.): <Buchtitel>,\linebreak%
+%Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn <Jahr> \hspace{5pt} \thepage \hspace{0.05cm}}
+
+%Linie unter Kopfzeile
+\renewcommand{\headrulewidth}{0.4pt}
+}
+
+% Put in the short title (Kurztitle) here
+\fancypagestyle{lni}{
+\fancyhf{}
+%Zu lange Titel müssen von den HerausgeberInnen gekürzt werden, Vorschläge der AutorInnen dazu sind herzlich willkommen.
+\fancyhead[RO]{\small Der Kurztitel \hspace{5pt}
+\thepage \hspace{0.05cm}}
+\fancyhead[LE]{\hspace{0.05cm}\small \thepage \hspace{5pt}
+%Bis zu drei AutorInnen werden alle angeführt, darüber hinaus wird nur die erste Autorin bzw. der erste Autor angeführt und alle Weiteren mit et al.\ abgekürzt.
+%Zu lange AutorInnenlisten müssen von den HerausgeberInnen gekürzt werden.
+Vorname1 Nachname1 und Vorname2 Nachname2}
+\renewcommand{\headrulewidth}{0.4pt}
+}
+
+%if lstlistings is used
+%better approach: use the minted package - see https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings#The_minted_package
+\usepackage{listings}
+
+\iflnienglish
+\usepackage[figurename=Fig., tablename=Tab., small]{caption}
+\else
+\usepackage[figurename=Abb., tablename=Tab., small]{caption}
+\fi
+
+% Listingname heißt nun List.
+\renewcommand{\lstlistingname}{List.}
+
+%for easy quotations: \enquote{text}
+\usepackage{csquotes}
+
+\usepackage[T1]{fontenc}
+
+%enable margin kerning
+\usepackage{microtype}
+
+%for demonstration purposes only
+\usepackage[math]{blindtext}
+
+%tweak \url{...}
+\usepackage{url}
+%nicer // - solution by http://tex.stackexchange.com/a/98470/9075
+\makeatletter
+\def\Url@twoslashes{\mathchar`\/\@ifnextchar/{\kern-.2em}{}}
+\g@addto@macro\UrlSpecials{\do\/{\Url@twoslashes}}
+\makeatother
+\urlstyle{same}
+%improve wrapping of URLs - hint by http://tex.stackexchange.com/a/10419/9075
+\makeatletter
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+\makeatother
+
+%diagonal lines in a table - http://tex.stackexchange.com/questions/17745/diagonal-lines-in-table-cell
+%slashbox is not available in texlive (due to licensing) and also gives bad results. Thus, we use diagbox
+%\usepackage{diagbox}
+
+\usepackage{booktabs}
+
+%required for pdfcomment later
+\usepackage{xcolor}
+
+% new packages BEFORE hyperref
+% See also http://tex.stackexchange.com/questions/1863/which-packages-should-be-loaded-after-hyperref-instead-of-before
+
+%enable hyperref without colors and without bookmarks
+\usepackage[
+%pdfauthor={},
+%pdfsubject={},
+%pdftitle={},
+%pdfkeywords={},
+bookmarks=false,
+breaklinks=true,
+colorlinks=true,
+linkcolor=black,
+citecolor=black,
+urlcolor=black,
+pdfpagelayout=SinglePage,
+pdfstartview=Fit
+]{hyperref}
+%enables correct jumping to figures when referencing
+\usepackage[all]{hypcap}
+
+%enable nice comments
+\usepackage{pdfcomment}
+\newcommand{\commentontext}[2]{\colorbox{yellow!60}{#1}\pdfcomment[color={0.234 0.867 0.211},hoffset=-6pt,voffset=10pt,opacity=0.5]{#2}}
+\newcommand{\commentatside}[1]{\pdfcomment[color={0.045 0.278 0.643},icon=Note]{#1}}
+
+%compatibality with TODO package
+\newcommand{\todo}[1]{\commentatside{#1}}
+
+%enable \cref{...} and \Cref{...} instead of \ref: Type of reference included in the link
+\iflnienglish
+\usepackage[capitalise,nameinlink]{cleveref}
+%Nice formats for \cref
+\crefname{section}{Sect.}{Sect.}
+\Crefname{section}{Section}{Sections}
+\crefname{figure}{Fig.}{Fig.}
+\Crefname{figure}{Figure}{Figures}
+\else
+\usepackage[ngerman,capitalise,nameinlink]{cleveref}
+\fi
+
+%introduce \powerset - hint by http://matheplanet.com/matheplanet/nuke/html/viewtopic.php?topic=136492&post_id=997377
+\DeclareFontFamily{U}{MnSymbolC}{}
+\DeclareSymbolFont{MnSyC}{U}{MnSymbolC}{m}{n}
+\DeclareFontShape{U}{MnSymbolC}{m}{n}{
+    <-6>  MnSymbolC5
+   <6-7>  MnSymbolC6
+   <7-8>  MnSymbolC7
+   <8-9>  MnSymbolC8
+   <9-10> MnSymbolC9
+  <10-12> MnSymbolC10
+  <12->   MnSymbolC12%
+}{}
+\DeclareMathSymbol{\powerset}{\mathord}{MnSyC}{180}
+
+%improve float placement
+%source: http://people.cs.uu.nl/piet/floats/node1.html
+%see also: http://tex.stackexchange.com/a/35130/9075
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.95}
+\renewcommand{\floatpagefraction}{0.35}
+\setcounter{totalnumber}{5}
+
+% correct bad hyphenation here
+\hyphenation{net-works semi-conduc-tor}
+
+
+%%% Adapt to your needs from here
 
 %Beginn der Seitenzählung für diesen Beitrag
-\setcounter{page}{11}
+\setcounter{page}{1}
 
-%Kopfzeileneinstellungen
-\pagestyle{fancy}
-\fancyhead{} % Löscht alle Kopfzeileneinstellungen
-\fancyhead[RO]{\small $<$Vorname Nachname [et. al.]$>$(Hrsg.): $<$Buchtitel$>$, \linebreak Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn $<$Jahr$>$ \hspace{5pt} \thepage \hspace{0.05cm}}
-\fancyfoot{} % Löscht alle Fußzeileneinstellungen
-\renewcommand{\headrulewidth}{0.4pt} %Linie unter Kopfzeile 
-\setcounter{footnote}{0}
+\author{
+Vorname1 Nachname1\footnote{Einrichtung/Universität, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author1} \, %
+Vorname2 Nachname2\footnote{Einrichtung/Universität, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author2} \, %
+und weitere Autorinnen und Autoren in der gleichen Notation}
 
-\author{Vorname1 Nachname1\footnote{Einrichtung/Universität, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author1} \, Vorname2 Nachname2\footnote{Einrichtung/Universität, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author2} \ und weitere Autorinnen und Autoren in der gleichen Notation}
 \title{Der Titel des Beitrags, der auch etwas länger sein und über zwei Zeilen reichen kann}
+
 \begin{document}
 \maketitle
-%Überschrift des Literaturverzeichnisses - delete this line in english
-\renewcommand{\refname}{Literaturverzeichnis}
-\setcounter{footnote}{2} %Auf Anzahl der AutorInnen setzen, damit die weitere Nummerierung der Fußnoten passt
+
+%hint by http://tex.stackexchange.com/a/30229/9075 and http://tex.stackexchange.com/a/247652/9075
+\thispagestyle{lnifirstpage}
+\pagestyle{lni}
+
+%Auf Anzahl der AutorInnen setzen, damit die weitere Nummerierung der Fußnoten passt
+%Dieser Befehl \verb|\setcounter{footnote}{2}| legt in dem Fall fest, dass 2 Fußnotennummern bereits für die AutorInnen verbraucht wurden, damit die darauf folgenden Fußnoten mit der richtigen Nummerierung (ab 3) fortfahren. Dieser Wert muss an die jeweilige Zahl an AutorInnen bzw. bereits verbrauchte Fußnoten angepasst werden, sofern im weiteren Verlauf Fußnoten verwendet werden.
+\setcounter{footnote}{2}
 
 \begin{abstract}
-Die \LaTeX-Klasse \texttt{lni} setzt die Layout-Vorgaben für Beiträge in LNI Konferenzbänden um. Dieses Dokument beschreibt ihre Verwendung und ist ein Beispiel für die entsprechende Darstellung. Der Abstract ist ein kurzer Überblick über die Arbeit der zwischen 70 und 150 Wörtern lang sein und das Wichtigste enthalten sollte. Die Formatierung erfolgt automatisch innerhalb des abstract-Bereichs.
+Die \LaTeX-Klasse \texttt{lni} setzt die Layout-Vorgaben für Beiträge in LNI Konferenzbänden um.
+Dieses Dokument beschreibt ihre Verwendung und ist ein Beispiel für die entsprechende Darstellung.
+Der Abstract ist ein kurzer Überblick über die Arbeit der zwischen 70 und 150 Wörtern lang sein und das Wichtigste enthalten sollte.
+Die Formatierung erfolgt automatisch innerhalb des abstract-Bereichs.
 \end{abstract}
+
 \begin{keywords}
 LNI Guidelines, \LaTeX Vorlage. Die Formatierung erfolgt automatisch innerhalb des keywords-Bereichs.
 \end{keywords}
 
 \section{Verwendung}
-Die GI gibt unter \texttt{http://www.gi-ev.de/LNI} Vorgaben für die Formatierung von Dokumenten in der LNI Reihe. Für \LaTeX-Dokumente werden diese durch die Dokumentenklasse \texttt{lni} realisiert. Dieses Dokument beschreibt die Klasse in der Version 0.6. Mit den Literaturverzeichnis-Stilen \texttt{lnig.bst} (deutsch) Version 2.0 sowie \texttt{lni.bst} (englisch) Version 1.0. 
+Die GI gibt unter \url{http://www.gi-ev.de/LNI} Vorgaben für die Formatierung von Dokumenten in der LNI Reihe.
+Für \LaTeX-Dokumente werden diese durch die Dokumentenklasse \texttt{lni} realisiert.
 
-Die Dokumentenklasse wird wie üblich durch Verwendung im Dokumentenkopf eingebunden:
+Dieses Dokument basiert auf der offiziellen Dokumentation, aber wurde entsprechend der aktuellen Vorlage und den eingebundenen Paketen aktualisiert.
+Die aktuelle Version wird unter \url{https://github.com/latextemplates/LNI} gepflegt.
+Es werden (nach Möglichkeit) die aktuellen Versionen von der GI eingebunden.
 
-\begin{verbatim}
-\documentclass{lni}
-\end{verbatim}
+Diese Dokumentation simplifiziert und setzt grundlegendes LaTeX-Wissen voraus.
+Es werden generische Platzhalter an die entsprechenden Stellen (wie Beispielsweise Author) gesetzt und nicht weiter an anderer Stelle dokumentiert.
 
-Die Klasse beruht auf der normalen \texttt{article}-Klasse und verlangt zusätzlich das Vorhandensein der Schriftart Times-Roman und deren Einbindung über den Stil \texttt{times} sowie den \texttt{verbatim}-Styles. Diese sind mit praktisch allen \LaTeX-Installationen erhältlich, ebenso sind die entsprechenden Zeichensätze frei erhältlich.
+Dieses Template ist wie folgt gegliedert:
+\Cref{sec:demos} zeigt Demonstrationen der Verbesserung von GitHub-LNI gegenüber der originalen Vorlage.
+\Cref{sec:lniconformance} zeigt die Einhaltung der Richtlinien durch einfachen Text.
+\Cref{sec:monographien} enthält Hinweise für Monographien. Diese kommen zum Einsatz, wenn \emph{kein} Tagungsbandbeitrag verfasst wird, sondern eine Dissertation oder ähnliches.
 
-Zusätzlich werden die Styles fancyhdr.sty und changepage.sty benötigt, die im Beispielpaket bereits enthalten sind bzw. unter www.ctan.org frei erhältlich sind. 
+\section{Demonstrationen}
+\label{sec:demos}
+The symbol for powerset is now correct: $\powerset$ and not a Weierstrass p ($\wp$).
 
-Mögliche Dokumentenoption ist: \texttt{english}. Für Auswahl der Sprache, siehe Abschnitt~\ref{sprache}.\linebreak 
-\clearpage
-%Kopfzeileneinstellungen ab Seite 2
-\pagestyle{fancy}
-\fancyhead{} % Löscht alle Kopfzeileneinstellungen
-\fancyhead[RO]{\small Der Kurztitel des Beitrags \hspace{5pt} \thepage \hspace{0.05cm}}
-\fancyhead[LE]{\hspace{0.05cm}\small \thepage \hspace{5pt} Vorname1 Nachname1 und Vorname2 Nachname2}
-\fancyfoot{} % Löscht alle Fußzeileneinstellungen
-\renewcommand{\headrulewidth}{0.4pt} %Linie unter Kopfzeile 
+Brackets work as designed:
+<test>
 
-Für die richtige Benennung der captions sind die Befehle
-\begin{verbatim}
-\usepackage[figurename=Abb.,tablename=Tab.,small]{caption}
-[2008/04/01]
-\renewcommand{\lstlistingname}{List.}  
-\end{verbatim}
-einzufügen. In englischen Texten ist der \texttt{figurename} auf \texttt{Fig.} zu setzen. 
+See \href{https://www.ctan.org/pkg/microtype}{microtype} in action here:
+\blindtext
 
-Die Nummerierung der Beiträge ist durch die HerausgeberInnen durchzuführen. Mit Hilfe des Befehls
-\begin{verbatim}
-\setcounter{page}{11}
-\end{verbatim}
-kann die Start-Seitenzahl für den Beitrag angegeben werden. Alternativ könnte Ihnen von den HerausgeberInnen auch die Seitenzahl vor Abgabe der Druckversion mitgeteilt werden, dann wäre die Änderung selbst vorzunehmen.
+\section{Demonstration der Einhaltung der Richtlinien}
+\label{sec:lniconformance}
 
-Wenn die \texttt{lstlisting}-Umgebung verwendet wird muss noch der Style listings.sty eingebunden werden. 
-\section{Benutzung}
+\subsection{Literaturverzeichnis}
+Der letzte Abschnitt zeigt ein beispielhaftes Literaturverzeichnis für Bücher mit einem Autor \cite{Ez10} und zwei AutorInnen \cite{AB00}, einem Beitrag in Proceedings mit drei AutorInnen \cite{ABC01}, einem Beitrag in einem LNI Band mit mehr als drei AutorInnen \cite{Az09}, zwei Bücher mit den jeweils selben vier AutorInnen im selben Erscheinungsjahr \cite{Wa14} und \cite{Wa14b}, ein Journal \cite{Gl06}, eine Website \cite{GI14} bzw. anderweitige Literatur ohne konkrete AutorInnenschaft \cite{XX14}.
 
-Die Klasse führt keine zusätzlichen \LaTeX-Makros ein. Ein LNI-Beitrag sollte sich auf die für die Klasse \texttt{article} definierten Makros stützen und wo immer möglich auf die Standardmakros bauen. Eigene Makros sollten zusätzlich in externen \texttt{.sty}-Dateien definiert werden, um das spätere Zusammenstellen von Beiträgen einer Konferenz zu erleichtern.
-
-\subsection{Sprache der Dokumente}
-\label{sprache}
-
-Die Dokumentenklasse trifft Vorkehrungen für deutsch- und englischsprachige Dokumente. Dabei ist für den Normalfall deutsch als Dokumentensprache vorgesehen. Soll ein Dokument komplett in englischer Sprache gesetzt werden, muss die Dokumentenoption \texttt{english}
-verwendet werden.
-
-Zum Umschalten innerhalb des Textes oder am Anfang des Dokuments wird wie gewohnt mit \verb|\selectlanguage| aus dem Babel-Paket gearbeitet. Diese Paket lädt die \texttt{lni}-Klasse vor -- es braucht also nicht normals geladen werden.
-
-\texttt{lni} verwendet für die deutsche Sprache die Trennmuster nach der neuen Rechtschreibung. Das entsprechende Sprachkürzel dafür lautet \texttt{ngerman} (und nicht \texttt{german}). Falls Ihr \LaTeX\ diese Trennmuster noch nicht unterstützt, müssen Sie Ihre System entsprechend anpassen (siehe \texttt{www.dante.de}).
-
-Um beispielsweise ein Dokument komplett in Englisch zu setzen, sollte im Dokument mit
-
-\begin{verbatim}
-\documentclass[english]{lni}
-\end{verbatim}
-
-beginnen. Dadurch werden die Trennmuster und verschiedene feste Textbestandteile in Englischer Sprache verwendet (z.B.\ "`Literaturverzeichnis"' in "`References"'). 
-Beachten Sie, dass hierfür der Befehl 
-\begin{verbatim}
-\renewcommand{\refname}{Literaturverzeichnis}
-\end{verbatim}
-entfernt werden muss. 
-Wie bereits erwähnt, muss zusätzlich noch die Bezeichnung für Abbildungen auf \texttt{Fig.} gesetzt werden:
-\begin{verbatim}
-\usepackage[figurename=Fig.,tablename=Tab.,small]{caption}
-[2008/04/01]  
-\end{verbatim}
-
-Die eventuell weiteren notwendigen sprachspezifische Zusatzklassen müssen allerdings manuell genutzt werden. Dieses Dokument verwendet beispielsweise:
-
-\begin{verbatim}
-\usepackage{latin1}
-\end{verbatim}
-
-\subsection{Titel, AutorInnenangaben, Abstract und Keywords}
-
-Der Beitragstitel wird wir üblich in \verb|\title| vermerkt. AutorInnenangaben sind in \verb|\author| definiert. Der Titel selber wird wie üblich durch \verb|\maketitle| gesetzt. Angaben über die AutorInnen (Einrichtung, Anschrift, Mailadresse) müssen mittels einer Fußnote \verb|\footnote| innerhalb von \verb|\author| vermerkt werden. 
-
-Dieses Dokument verwendet folgende Zeilen zum Setzen der Dokumenteninformationen:
-
-\begin{verbatim}
-\author{Vorname1 Nachname1 \footnote{...} \ und ...}
-\title{Der Titel}
-\begin{document}
-\maketitle
-% Richtige Benennung
-\renewcommand{\refname}{Literaturverzeichnis}
-%Fußnote wegen Information zu AutorInnen in Fußnoten zurücksetzen
-\setcounter{footnote}{2}
-\begin{abstract}
-Abstract Text.
-\end{abstract}
-\begin{keywords}
-Keywords, Text.
-\end{keywords}
-\end{verbatim}
-
-Der Befehl \verb|\renewcommand{\refname}{Literaturverzeichnis}| legt fest, dass das Literaturverzeichnis die Überschrift "Literaturverzeichnis" hat, und nicht Literatur. Für englische Dokumente muss der Befehl weggelassen werden um "References" zu erhalten.
-
-Der Befehl \verb|\setcounter{footnote}{2}| legt in dem Fall fest, dass 2 Fußnotennummern bereits für die AutorInnen verbraucht wurden, damit die darauf folgenden Fußnoten mit der richtigen Nummerierung (ab 3) fortfahren. Dieser Wert muss an die jeweilige Zahl an AutorInnen bzw. bereits verbrauchte Fußnoten angepasst werden, sofern im weiteren Verlauf Fußnoten verwendet werden.
-
-\subsection{Textstrukturen}
-
-Verschiedene Parameter für Textstrukturen werden in der \texttt{lni}-Klasse umdefiniert. Damit diese Einstellung wirksam sind, müssen die Dokumente teilweise genau die entsprechenden Makros verwenden. 
-
-Das Layout des Fließtextes ist durch die Dokumentenklasse definiert und benötigt keinerlei weitere Anpassungen. Überschriften werden mit \verb|\section|, Unterüberschriften mit \verb|\subsection| definiert. Fußnoten mit \verb|\footnote|.\footnote{Die nötigen Layout-Einstellungen sind in der Dokumentenklasse voreingestellt.}
-\begin{itemize} 
-\item Aufzählungen werden mit Hilfe der \verb|\itemize| Umgebung realisiert.
-\item Die passende Formatierung ist bereits in der  \texttt{lni}-Dokumentenklasse definiert. 
-\begin{itemize}
-\item Aufzählungen sollen nicht tiefer als zwei Ebenen sein. 
-\end{itemize}
-\end{itemize}
-\begin{enumerate} 
-\item Nummerierte Aufzählungen werden mit Hilfe der \verb|\enumerate| Umgebung realisiert.
-\begin{enumerate} 
-\item Die passende Formatierung ist auch bereits in der  \texttt{lni}-Dokumentenklasse definiert. 
-\end{enumerate}
-\end{enumerate}
+Formatierung und Abkürzungen werden für die Referenzen \texttt{book}, \texttt{inbook}, \texttt{proceedings}, \texttt{inproceedings}, \texttt{article}, \texttt{online} und \texttt{misc} automatisch vorgenommen.
+Mögliche Felder für Referenzen können der Beispieldatei \texttt{paper.bib} entnommen werden.
+Andere Referenzen bzw. Felder müssen allenfalls nachträglich angepasst werden.
 
 \subsection{Abbildungen}
+\Cref{fig:demo} zeigt eine Abbildung.
 
-Abbildungen werden mit den üblichen \LaTeX-Mitteln erzeugt. Dabei muss die Abbildungsunterschrift mit \verb|\caption| nach der Abbildung eingefügt werden und vor der Abbildung muss der \verb|\centering| -Befehl stehen um die Zentrierung zu gewährleisten. (Die Verwendung des Befehls \verb|\begin{center}...|\verb|\end{center}| kann zu unerwünschten Abständen im Text führen.
+\begin{figure}
+  \centering
+  Hier sollte die Graphik mittels \texttt{includegraphics} eingebunden werden.
 
-Für die Positionierung von Abbildungen sollte \texttt{[htb]} gewählt werden. Abbildung~\ref{logo} zeigt ein Beispiel, das so erzeugt wurde.
-
-\begin{verbatim}
-\begin{figure}[htb]
-\centering
-    \includegraphics[width=2cm]{gilogo}
-    \caption{\label{logo}Das Logo der GI}
-\end{figure}
-\end{verbatim}
-
-\begin{figure}[htb]
-\centering
-    \includegraphics[width=2cm]{gilogo}
-    \caption{\label{logo}Das Logo der GI}
+  %\includegraphics[width=.8\textwidth]{filename}
+  \caption{Demographik}
+  \label{fig:demo}
 \end{figure}
 
-Wenn möglich sollte die Einstellung \texttt{[h]} bevorzugt werden, da eine Verschiebung der Grafik an den Seitenbeginn \texttt{t-top} oder das Seitenende \texttt{b-bottom} meist zu unerwünschten Veränderungen der Abstände nach bzw. vor den Abbildungen führt.
-Bislang sind keine weiteren Spezialstile für Abbildungen getestet worden (Beispielsweise \texttt{subfigure}).
 \subsection{Tabellen}
-Tabellen werden mit den üblichen \LaTeX-Mitteln erzeugt. Dabei muss die Tabellenunterschrift mit \verb|\caption| nach der Tabelle eingefügt werden und der Befehl \verb|\centering| vor der Tabelle eingefügt werden.
-\begin{verbatim}
-\begin{table}[htb]
-\centering
-\begin{tabular}{l l l}
-\hline
-Überschriftsebenen & Beispiel & Schriftgröße und -art \\
-\hline
-Titel (linksbündig) & Der Titel … & 14 pt, Fett\\
-\hline
-Überschrift 1 & 1 Einleitung & 12 pt, Fett\\
-\hline
-Überschrift 2 & 2.1 Titel & 10 pt, Fett\\
-\hline
-\end{tabular}
-\caption{\label{tab1}Die Überschriftsarten}
-\end{table}
-\end{verbatim}
+\Cref{tab:demo} zeigt eine Tabelle.
 
-Für die Positionierung von Tabellen sollte \verb|[htb]| gewählt werden. Tabelle~\ref{tab1} zeigt ein Beispiel, das so erzeugt wurde.
-
-\begin{table}[htb]
+\begin{table}
 \centering
-\begin{tabular}{l l l}
-\hline
+\begin{tabular}{lll}
+\toprule
 Überschriftsebenen & Beispiel & Schriftgröße und -art \\
-\hline
-Titel (linksbündig) & Der Titel … & 14 pt, Fett\\
+\midrule
+Titel (linksbündig) & Der Titel \ldots & 14 pt, Fett\\
 Überschrift 1 & 1 Einleitung & 12 pt, Fett\\
 Überschrift 2 & 2.1 Titel & 10 pt, Fett\\
-\hline
+\bottomrule
 \end{tabular}
-\caption{\label{tab1}Die Überschriftsarten}
+\caption{Die Überschriftsarten}
+\label{tab:demo}
 \end{table}
 
 \subsection{Programmcode}
-Die LNI-Formatvorlage verlangt die Einrückung von Listings vom linken Rand. In der \texttt{lni}-Dokumentenklasse ist dies für die \texttt{verbatim}-Umgebung realisiert.
+Die LNI-Formatvorlage verlangt die Einrückung von Listings vom linken Rand.
+In der \texttt{lni}-Dokumentenklasse ist dies für die \texttt{verbatim}-Umgebung realisiert.
+
 \begin{verbatim}
 public class Hello { 
     public static void main (String[] args) { 
@@ -228,16 +293,8 @@ public class Hello {
 \end{verbatim}
 
 Alternativ kann auch die \texttt{lstlisting}-Umgebung verwendet werden.
-\begin{verbatim}
-	\lstset{basicstyle=\ttfamily}%setzt die Schriftart	
-	\begin{lstlisting} [captionpos=b, caption=Beschreibung, label=L1,
-	 xleftmargin=0.5cm]
-	 %Hier können die Beschreibung und der Label gesetzt werden
-	...
-	\end{lstlisting}
-\end{verbatim}
 
-Listing~\ref{L1} zeigt uns ein Beispiel, das mit Hilfe der \texttt{lstlisting}-Umgebung realisiert ist.
+\Cref{L1} zeigt uns ein Beispiel, das mit Hilfe der \texttt{lstlisting}-Umgebung realisiert ist.
 
 \lstset{basicstyle=\ttfamily}
 \begin{lstlisting} [captionpos=b, caption=Beschreibung, label=L1, xleftmargin=0.5cm]
@@ -252,18 +309,6 @@ public class Hello {
 
 Die korrekte Einrückung und Nummerierung für Formeln ist bei den Umgebungen \texttt{equation} und \texttt{eqnarray} gewährleistet.
 
-\begin{verbatim}
-\begin{equation}
-  1=4-3
-\end{equation}
-
-\begin{eqnarray}
-  2=7-5\\
-  3=2-1
-\end{eqnarray}
-\end{verbatim}
-
-ergibt
 \begin{equation}
   1=4-3
 \end{equation}
@@ -273,91 +318,27 @@ und
   3=2-1
 \end{eqnarray}
 
-\subsection{Literaturverzeichnis}
-
-Die \texttt{lni}-Klasse definiert automatisch den \texttt{lnig}-Bibliographiestil, eine separate Deklaration mit \verb|\bibliographystyle{lni}| ist also überflüssig, aber auch nicht schädlich. Wie gewohnt wird das Literaturverzeichnis wie folgt eingebunden:
-
-\begin{verbatim}
-\bibliography{lniguide}
-\end{verbatim}
-
-Bei Verwendung der Dokumentenoption \texttt{english} wird der englischsprachige Bibliographiestil \texttt{lni} verwendet. Bei eventuell wechselnder Sprachlichkeit im Dokument gilt die Sprachwahl, die bei Auftreten von \verb|\bibliography| eingestellt ist auch für das Literaturverzeichnis.
-
-\subsubsection{Referenzen}
-Formatierung und Abkürzungen werden für die Referenzen \texttt{book}, \texttt{inbook}, \texttt{proceedings}, \texttt{inproceedings}, \texttt{article}, \texttt{online} und \texttt{misc} automatisch vorgenommen. Mögliche Felder für Referenzen können der Beispieldatei \texttt{lniguide.bib} entnommen werden. 
-Andere Referenzen bzw. Felder müssen allenfalls nachträglich angepasst werden.
-
-\subsubsection{Beispiele}
-Das letzte Kapitel zeigt ein beispielhaftes Literaturverzeichnis für Bücher mit einem Autor \cite{Ez10} und zwei AutorInnen \cite{AB00}, einem Beitrag in Proceedings mit drei AutorInnen \cite{ABC01}, einem Beitrag in einem LNI Band mit mehr als drei AutorInnen \cite{Az09}, zwei Bücher mit den jeweils selben vier AutorInnen im selben Erscheinungsjahr \cite{Wa14} und \cite{Wa14b}, ein Journal \cite{Gl06}, eine Website \cite{GI14} bzw. anderweitige Literatur ohne konkrete AutorInnenschaft \cite{XX14}.
-
-
-\section{Kopfzeile und Paginierung}
-Die Kopfzeile wird mittels \verb|\fancyhead| erzeugt. Sie ist auf der 1. Seite unterschiedlich zu der an den geraden und ungeraden Seiten.  
-
-Zu Beginn des Dokuments ist die Kopfzeile der 1. Seite zu definieren. 
-
-\begin{verbatim}
-\pagestyle{fancy}
-\fancyhead{} 
-\fancyhead[RO]{\small $<$Vorname Nachname [et. al.]$>$(Hrsg.): $
-<$Buchtitel$>$, \linebreak Lecture Notes in Informatics (LNI), 
-Gesellschaft für Informatik, Bonn $<$Jahr$>$ \hspace{5pt} 
-\thepage \hspace{0.05cm}}
-\fancyfoot{} 
-\renewcommand{\headrulewidth}{0.4pt}  
-\end{verbatim}
-
-Es sind die HerausgeberInnen des aktuellen LNI Bandes sowie der Titel des Bandes in der oben beschriebenen Notation anzuführen und das Erscheinungsjahr zu ergänzen. Die dafür notwendigen Informationen erhalten Sie von den HerausgeberInnen vor der Einreichung der endgültigen Druckversion. 
-
-Zu Beginn der 2. Seite ist die Zeile 
-\begin{verbatim}
-\linebreak
-\pagestyle{fancy}
-\fancyhead{} 
-\fancyhead[RO]{\small Der Kurztitel \hspace{5pt} 
-\thepage \hspace{0.05cm}}
-\fancyhead[LE]{\hspace{0.05cm}\small \thepage \hspace{5pt} 
-Vorname1 Nachname1 und Vorname2 Nachname2}
-\fancyfoot{} 
-\renewcommand{\headrulewidth}{0.4pt}
-\end{verbatim}
-einzufügen, die sicherstellt, dass die Kopfzeilen ab der 2. Seite unterschiedlich zu der der 1. Seite sind. 
-
-Auf den geraden Seiten steht links oben die Seitenzahl und die Vor- und Familiennamen der AutorInnen. Bis zu drei AutorInnen werden alle angeführt, darüber hinaus wird nur die erste Autorin bzw. der erste Autor angeführt und alle Weiteren mit et al. abgekürzt. Zu lange AutorInnenlisten müssen von den HerausgeberInnen gekürzt werden.
-
-Auf den ungeraden Seiten stehen rechts oben die Seitenzahl und der Titel des Beitrags. Zu lange Titel müssen von den HerausgeberInnen gekürzt werden, Vorschläge der AutorInnen dazu sind herzlich willkommen. 
-
-Für Proceedings und Seminarbände ist die Seitennummerierung, wenn nicht anders vorgegeben, von den HerausgeberInnen vorzunehmen, die einzelnen Beiträge sind von deren AutorInnen also ohne Seitennummerierung vorzulegen; Monographien und Dissertationen sind von der Autorin/ vom Autor  zu nummerieren:
+\section{Hinweise für Monographien}
+\label{sec:monographien}
+Für Proceedings und Seminarbände ist die Seitennummerierung, wenn nicht anders vorgegeben, von den HerausgeberInnen vorzunehmen, die einzelnen Beiträge sind von deren AutorInnen also ohne Seitennummerierung vorzulegen; Monographien und Dissertationen sind von der Autorin/ vom Autor zu nummerieren:
 \begin{itemize}
-\item Vorwort, Inhaltsverzeichnis und Beiträge beginnen grundsätzlich auf einer rechten Seite, ggf. ist also eine Leerseite einzufügen. 
-\item Die Seitennummer des ersten Beitrages errechnet sich aus der Seitenzahl der “Startseiten“ + 1 
-\item Die „Startseiten“ (Muster siehe Anlage in der HerausgeberInnen-Information) bestehen aus:
+\item Vorwort, Inhaltsverzeichnis und Beiträge beginnen grundsätzlich auf einer rechten Seite, ggf.\ ist also eine Leerseite einzufügen.
+\item Die Seitennummer des ersten Beitrages errechnet sich aus der Seitenzahl der \enquote{Startseiten} + 1
+\item Die \enquote{Startseiten} (Muster siehe Anlage in der HerausgeberInnen-Information) bestehen aus:
 \begin{itemize}
-\item 1. Seite (rechts): GI-Logo
-\item 2. Seite (links): leer
-\item 3. Seite (rechts): Titelblatt 
-\item 4. Seite (links): Bibliographische Angaben
-\item 5. Seite ff (rechts): Vorwort
-\item Anschließend an das Vorwort auf neuer Seite (links oder rechts): Angaben zur Tagungsleitung, zum Programmkomitee oder Organisationsteam, etc. Hier können auch Logos von SponsorInnen und VeranstaltungspartnerInnen abgedruckt werden. 
+\item 1.\ Seite (rechts): GI-Logo
+\item 2.\ Seite (links): leer
+\item 3.\ Seite (rechts): Titelblatt
+\item 4.\ Seite (links): Bibliographische Angaben
+\item 5.\ Seite ff (rechts): Vorwort
+\item Anschließend an das Vorwort auf neuer Seite (links oder rechts): Angaben zur Tagungsleitung, zum Programmkomitee oder Organisationsteam, etc. Hier können auch Logos von SponsorInnen und VeranstaltungspartnerInnen abgedruckt werden.
 \item Beginnend auf einer rechten (ungerade nummerierten) Seite: Inhaltsverzeichnis
 \end{itemize}
 \end{itemize}
 
+%DO NOT USE \bibliographystyle - is is already done in lni.cls
+%\bibliographystyle{lnig}
 
-\section{Installation}
-
-\texttt{lni.cls} und \texttt{lni.bst} müssen für Ihr \TeX-System auffindbar sein. Die Klasse benutzt die Pakete \texttt{times} und \texttt{verbatim}, die in \LaTeX-Installationen normalerweise vorhanden und ansonsten beispielsweise über
-\texttt{www.dante.de} kostenfrei erhältlich sind.
-
-\section{Verarbeitung von Beiträgen in LNI Konferenzbänden}
-
-Die Klasse \texttt{lni} dient der Auszeichnung von einzelnen Beiträgen für Workshops, Tagungen etc., die einen LNI-Konferenzband herausgeben. Die Verarbeitung der einzelnen Beiträge zu einem kompletten Band ist Aufgabe der jeweiligen Herausgeber und wird durch
-eine weitere Klasse \texttt{lniproc} unterstützt.
-
-\bibliographystyle{lnig}
 \bibliography{lniguide}
 
 \end{document}
-
-
-

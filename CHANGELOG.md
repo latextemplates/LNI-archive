@@ -10,6 +10,18 @@ We refer to [GitHub issues](https://github.com/latextemplates/LNI/issues) by usi
 
 ## [Unreleased]
 
+### Changed
+
+#### paper.tex
+* Renamed from lniguide.tex
+* Move many text to comments
+* Fix placing of `\label` (has to be placed outside of `\caption`)
+* Fix spacing by using `\` after `.`
+* Use \fancypagestyle to avoid multiple page style configurations within the document
+* Make use of \iflnienglish to avoid configuration at different places
+* Enable German spell check by TeXstudio
+* Include helpful packages, see [README.md](README.md) for details
+
 ## 0.5 - 2014-12-18
 This version and all versions before have been maintained outside of GitHub.
 The commits leading to this version have not been reconstructed.
