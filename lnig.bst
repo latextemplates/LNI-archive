@@ -1041,7 +1041,7 @@ FUNCTION {author.editor.key.label}
 { author empty$
     { editor empty$
         { key empty$
-            { title$ #1 #2 substring$ }% Use First two letters of title if there is no editor
+            { title #1 #2 substring$ }% Use First two letters of title if there is no editor
             { key #3 text.prefix$ }
           if$
         }
