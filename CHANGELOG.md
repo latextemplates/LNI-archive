@@ -14,6 +14,7 @@ We refer to [GitHub issues](https://github.com/latextemplates/LNI/issues) by usi
 
 #### lni.cls
 * Fix warning by package [nag](https://www.ctan.org/pkg/nag): \flushleft should not be used inside center environment
+* Reenabled default placement of figures and tables
 
 #### paper.tex
 * Renamed from lniguide.tex

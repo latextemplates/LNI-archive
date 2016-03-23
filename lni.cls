@@ -183,7 +183,7 @@
   \vskip\belowcaptionskip}
 
 %Abbildungen
-\def\fps@figure{htbp}
+%\def\fps@figure{htbp} %default parameter for floats - disabled to have floats placed at the top or the bottom of the page automatically
 \def\fnum@figure{\figurename\thinspace\thefigure}
 \def \@floatboxreset {%
         \reset@font
@@ -191,13 +191,14 @@
         \@setnobreak
         \@setminipage
 }
-\setcounter{topnumber}{10}%maximale Anzahl gleitender Objekte am Seitenanfang
-\setcounter{bottomnumber}{10}%maximale Anzahl gleitender Objekte am Seitenende
+%see also http://tex.stackexchange.com/a/39020/9075, http://people.cs.uu.nl/piet/floats/node1.html, and http://tex.stackexchange.com/a/35130/9075
+\setcounter{totalnumber}{5} %Maximal 5 Gleitobjekte auf einer Seite
 \renewcommand{\topfraction}{1.0}%Anteil den gleitende Objekte am Seitenanfang einnehmen dürfen
 \renewcommand{\bottomfraction}{1.0}%Anteil den gleitende Objekte am Seitenende einnehmen dürfen
+\renewcommand{\textfraction}{0.05} %Minimaler Anteil an Text auf einer Seite. Default: 0.2
 
 %Tabellen
-\def\fps@table{htbp}
+%\def\fps@table{htbp}
 \def\fnum@table{\tablename~\thetable}
 \renewcommand{\arraystretch}{1.1}%Abstand zu Linien in Tabelle
 \renewenvironment{table}
