@@ -1,35 +1,10 @@
-%% 
-%% lnig.bst
-%% Lecture Notes in Informatics Style File (english)
-%% Version 1.0 (2014/12/17)
+%% Lecture Notes in Informatics Style File (English)
 %%
-%%
-%% The Style File is based on alpha.bst
+%% The style file is based on alpha.bst
 %%
 %% This work may be freely used,
 %% distributed and modified.
 %% Modified files should be clearly indicated as such and renamed.
-%%
-%%***************************************************      
-% Changelog:
-%
-%  1.0       (17.12.14), Judith Michael, Alpen-Adria-Universität Klagenfurt, Austria
-% Changes:  
-%  - Last Name before the prename
-%  - ; between Autors
-%  - : before title
-%  - Lable: Abbreviation of name of first author instead of + (former: A+09 or WFEL14, now Az09 and Wa14)
-%  - Lable: Use first 2 letters of title if there is no author
-%  - add : after In (functions inproceedings and inbook) 
-%  - no emphasize of titles
-%  - editors in bracelets ()
-%  - correct order of reference infos
-%  - correct signs (.,:()) between reference infos 
-%  - Add second prename
-%  - change order of series (not: "number" in "series", now "series" "number"
-%
-%%***************************************************
-%
 
 ENTRY
   { address
