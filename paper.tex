@@ -5,7 +5,7 @@
 \RequirePackage[l2tabu, orthodox]{nag}
 %Neue deutsche Trennmuster
 %Siehe http://www.ctan.org/pkg/dehyph-exptl und http://projekte.dante.de/Trennmuster/WebHome
-%Nur für pdflatex, nicht für lualatex
+%Nur fÃ¼r pdflatex, nicht fÃ¼r lualatex
 \RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
 \documentclass{lni}
 % in Englisch stattdessen:
@@ -22,32 +22,32 @@
 % enable copy and paste of ligatures (e.g., in "workflow" and umlauts)
 \usepackage{cmap}
 
-%Überschrift des Literaturverzeichnisses
+%Ãœberschrift des Literaturverzeichnisses
 %Only in German
 \iflnienglish
 \else
 \renewcommand{\refname}{Literaturverzeichnis}
 \fi
 
-%Enable input of umlauts. Change to UTF-8 if you use UTF-8
-\usepackage[latin1]{inputenc}
+%Enable input of umlauts using UTF-8.
+\usepackage[utf8]{inputenc}
 
 \usepackage{graphicx}
 
 \usepackage{fancyhdr}
 
-%Kopf- und Fußzeileneinstellungen
+%Kopf- und FuÃŸzeileneinstellungen
 \fancypagestyle{lnifirstpage}{
-% Löscht alle Kopf- und Fußzeileneinstellungen
+% LÃ¶scht alle Kopf- und FuÃŸzeileneinstellungen
 \fancyhf{}
 
 %Kopfzeile
-\fancyhead[RO]{\small Einreichung für: <Konferenz/Workshop>,\linebreak%
-Geplant als Veröffentlichung innerhalb der Lecture Notes in Informatics (LNI)
+\fancyhead[RO]{\small Einreichung fÃ¼r: <Konferenz/Workshop>,\linebreak%
+Geplant als VerÃ¶ffentlichung innerhalb der Lecture Notes in Informatics (LNI)
 }
-%Für den Herausgeber:
+%FÃ¼r den Herausgeber:
 %\fancyhead[RO]{\small <Vorname Nachname [et. al.]> (Hrsg.): <Buchtitel>,\linebreak%
-%Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn <Jahr> \hspace{5pt} \thepage \hspace{0.05cm}}
+%Lecture Notes in Informatics (LNI), Gesellschaft fÃ¼r Informatik, Bonn <Jahr> \hspace{5pt} \thepage \hspace{0.05cm}}
 
 %Linie unter Kopfzeile
 \renewcommand{\headrulewidth}{0.4pt}
@@ -56,12 +56,12 @@ Geplant als Veröffentlichung innerhalb der Lecture Notes in Informatics (LNI)
 % Put in the short title (Kurztitle) here
 \fancypagestyle{lni}{
 \fancyhf{}
-%Zu lange Titel müssen von den HerausgeberInnen gekürzt werden, Vorschläge der AutorInnen dazu sind herzlich willkommen.
+%Zu lange Titel mÃ¼ssen von den HerausgeberInnen gekÃ¼rzt werden, VorschlÃ¤ge der AutorInnen dazu sind herzlich willkommen.
 \fancyhead[RO]{\small Der Kurztitel \hspace{5pt}
 \thepage \hspace{0.05cm}}
 \fancyhead[LE]{\hspace{0.05cm}\small \thepage \hspace{5pt}
-%Bis zu drei AutorInnen werden alle angeführt, darüber hinaus wird nur die erste Autorin bzw. der erste Autor angeführt und alle Weiteren mit et al.\ abgekürzt.
-%Zu lange AutorInnenlisten müssen von den HerausgeberInnen gekürzt werden.
+%Bis zu drei AutorInnen werden alle angefÃ¼hrt, darÃ¼ber hinaus wird nur die erste Autorin bzw. der erste Autor angefÃ¼hrt und alle Weiteren mit et al.\ abgekÃ¼rzt.
+%Zu lange AutorInnenlisten mÃ¼ssen von den HerausgeberInnen gekÃ¼rzt werden.
 Vorname1 Nachname1 und Vorname2 Nachname2}
 \renewcommand{\headrulewidth}{0.4pt}
 }
@@ -76,7 +76,7 @@ Vorname1 Nachname1 und Vorname2 Nachname2}
 \usepackage[figurename=Abb., tablename=Tab., small]{caption}
 \fi
 
-% Listingname heißt nun List.
+% Listingname heiÃŸt nun List.
 \renewcommand{\lstlistingname}{List.}
 
 %for easy quotations: \enquote{text}
@@ -182,15 +182,15 @@ pdfstartview=Fit
 
 %%% Adapt to your needs from here
 
-%Beginn der Seitenzählung für diesen Beitrag
+%Beginn der SeitenzÃ¤hlung fÃ¼r diesen Beitrag
 \setcounter{page}{1}
 
 \author{
-Vorname1 Nachname1\footnote{Einrichtung/Universität, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author1} \, %
-Vorname2 Nachname2\footnote{Einrichtung/Universität, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author2} \, %
+Vorname1 Nachname1\footnote{Einrichtung/UniversitÃ¤t, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author1} \, %
+Vorname2 Nachname2\footnote{Einrichtung/UniversitÃ¤t, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author2} \, %
 und weitere Autorinnen und Autoren in der gleichen Notation}
 
-\title{Der Titel des Beitrags, der auch etwas länger sein und über zwei Zeilen reichen kann}
+\title{Der Titel des Beitrags, der auch etwas lÃ¤nger sein und Ã¼ber zwei Zeilen reichen kann}
 
 \begin{document}
 \maketitle
@@ -199,14 +199,14 @@ und weitere Autorinnen und Autoren in der gleichen Notation}
 \thispagestyle{lnifirstpage}
 \pagestyle{lni}
 
-%Auf Anzahl der AutorInnen setzen, damit die weitere Nummerierung der Fußnoten passt
-%Dieser Befehl \verb|\setcounter{footnote}{2}| legt in dem Fall fest, dass 2 Fußnotennummern bereits für die AutorInnen verbraucht wurden, damit die darauf folgenden Fußnoten mit der richtigen Nummerierung (ab 3) fortfahren. Dieser Wert muss an die jeweilige Zahl an AutorInnen bzw. bereits verbrauchte Fußnoten angepasst werden, sofern im weiteren Verlauf Fußnoten verwendet werden.
+%Auf Anzahl der AutorInnen setzen, damit die weitere Nummerierung der FuÃŸnoten passt
+%Dieser Befehl \verb|\setcounter{footnote}{2}| legt in dem Fall fest, dass 2 FuÃŸnotennummern bereits fÃ¼r die AutorInnen verbraucht wurden, damit die darauf folgenden FuÃŸnoten mit der richtigen Nummerierung (ab 3) fortfahren. Dieser Wert muss an die jeweilige Zahl an AutorInnen bzw. bereits verbrauchte FuÃŸnoten angepasst werden, sofern im weiteren Verlauf FuÃŸnoten verwendet werden.
 \setcounter{footnote}{2}
 
 \begin{abstract}
-Die \LaTeX-Klasse \texttt{lni} setzt die Layout-Vorgaben für Beiträge in LNI Konferenzbänden um.
-Dieses Dokument beschreibt ihre Verwendung und ist ein Beispiel für die entsprechende Darstellung.
-Der Abstract ist ein kurzer Überblick über die Arbeit der zwischen 70 und 150 Wörtern lang sein und das Wichtigste enthalten sollte.
+Die \LaTeX-Klasse \texttt{lni} setzt die Layout-Vorgaben fÃ¼r BeitrÃ¤ge in LNI KonferenzbÃ¤nden um.
+Dieses Dokument beschreibt ihre Verwendung und ist ein Beispiel fÃ¼r die entsprechende Darstellung.
+Der Abstract ist ein kurzer Ãœberblick Ã¼ber die Arbeit der zwischen 70 und 150 WÃ¶rtern lang sein und das Wichtigste enthalten sollte.
 Die Formatierung erfolgt automatisch innerhalb des abstract-Bereichs.
 \end{abstract}
 
@@ -215,20 +215,20 @@ LNI Guidelines, \LaTeX Vorlage. Die Formatierung erfolgt automatisch innerhalb d
 \end{keywords}
 
 \section{Verwendung}
-Die GI gibt unter \url{http://www.gi-ev.de/LNI} Vorgaben für die Formatierung von Dokumenten in der LNI Reihe.
-Für \LaTeX-Dokumente werden diese durch die Dokumentenklasse \texttt{lni} realisiert.
+Die GI gibt unter \url{http://www.gi-ev.de/LNI} Vorgaben fÃ¼r die Formatierung von Dokumenten in der LNI Reihe.
+FÃ¼r \LaTeX-Dokumente werden diese durch die Dokumentenklasse \texttt{lni} realisiert.
 
 Dieses Dokument basiert auf der offiziellen Dokumentation, aber wurde entsprechend der aktuellen Vorlage und den eingebundenen Paketen aktualisiert.
 Die aktuelle Version wird unter \url{https://github.com/latextemplates/LNI} gepflegt.
-Es werden (nach Möglichkeit) die aktuellen Versionen von der GI eingebunden.
+Es werden (nach MÃ¶glichkeit) die aktuellen Versionen von der GI eingebunden.
 
 Diese Dokumentation simplifiziert und setzt grundlegendes LaTeX-Wissen voraus.
 Es werden generische Platzhalter an die entsprechenden Stellen (wie Beispielsweise Author) gesetzt und nicht weiter an anderer Stelle dokumentiert.
 
 Dieses Template ist wie folgt gegliedert:
-\Cref{sec:demos} zeigt Demonstrationen der Verbesserung von GitHub-LNI gegenüber der originalen Vorlage.
+\Cref{sec:demos} zeigt Demonstrationen der Verbesserung von GitHub-LNI gegenÃ¼ber der originalen Vorlage.
 \Cref{sec:lniconformance} zeigt die Einhaltung der Richtlinien durch einfachen Text.
-\Cref{sec:monographien} enthält Hinweise für Monographien. Diese kommen zum Einsatz, wenn \emph{kein} Tagungsbandbeitrag verfasst wird, sondern eine Dissertation oder ähnliches.
+\Cref{sec:monographien} enthÃ¤lt Hinweise fÃ¼r Monographien. Diese kommen zum Einsatz, wenn \emph{kein} Tagungsbandbeitrag verfasst wird, sondern eine Dissertation oder Ã¤hnliches.
 
 \section{Demonstrationen}
 \label{sec:demos}
@@ -244,11 +244,11 @@ See \href{https://www.ctan.org/pkg/microtype}{microtype} in action here:
 \label{sec:lniconformance}
 
 \subsection{Literaturverzeichnis}
-Der letzte Abschnitt zeigt ein beispielhaftes Literaturverzeichnis für Bücher mit einem Autor \cite{Ez10} und zwei AutorInnen \cite{AB00}, einem Beitrag in Proceedings mit drei AutorInnen \cite{ABC01}, einem Beitrag in einem LNI Band mit mehr als drei AutorInnen \cite{Az09}, zwei Bücher mit den jeweils selben vier AutorInnen im selben Erscheinungsjahr \cite{Wa14} und \cite{Wa14b}, ein Journal \cite{Gl06}, eine Website \cite{GI14} bzw.\ anderweitige Literatur ohne konkrete AutorInnenschaft \cite{XX14}.
+Der letzte Abschnitt zeigt ein beispielhaftes Literaturverzeichnis fÃ¼r BÃ¼cher mit einem Autor \cite{Ez10} und zwei AutorInnen \cite{AB00}, einem Beitrag in Proceedings mit drei AutorInnen \cite{ABC01}, einem Beitrag in einem LNI Band mit mehr als drei AutorInnen \cite{Az09}, zwei BÃ¼cher mit den jeweils selben vier AutorInnen im selben Erscheinungsjahr \cite{Wa14} und \cite{Wa14b}, ein Journal \cite{Gl06}, eine Website \cite{GI14} bzw.\ anderweitige Literatur ohne konkrete AutorInnenschaft \cite{XX14}.
 
-Formatierung und Abkürzungen werden für die Referenzen \texttt{book}, \texttt{inbook}, \texttt{proceedings}, \texttt{inproceedings}, \texttt{article}, \texttt{online} und \texttt{misc} automatisch vorgenommen.
-Mögliche Felder für Referenzen können der Beispieldatei \texttt{paper.bib} entnommen werden.
-Andere Referenzen bzw. Felder müssen allenfalls nachträglich angepasst werden.
+Formatierung und AbkÃ¼rzungen werden fÃ¼r die Referenzen \texttt{book}, \texttt{inbook}, \texttt{proceedings}, \texttt{inproceedings}, \texttt{article}, \texttt{online} und \texttt{misc} automatisch vorgenommen.
+MÃ¶gliche Felder fÃ¼r Referenzen kÃ¶nnen der Beispieldatei \texttt{paper.bib} entnommen werden.
+Andere Referenzen bzw. Felder mÃ¼ssen allenfalls nachtrÃ¤glich angepasst werden.
 
 \subsection{Abbildungen}
 \Cref{fig:demo} zeigt eine Abbildung.
@@ -269,20 +269,20 @@ Andere Referenzen bzw. Felder müssen allenfalls nachträglich angepasst werden.
 \centering
 \begin{tabular}{lll}
 \toprule
-Überschriftsebenen & Beispiel & Schriftgröße und -art \\
+Ãœberschriftsebenen & Beispiel & SchriftgrÃ¶ÃŸe und -art \\
 \midrule
-Titel (linksbündig) & Der Titel \ldots & 14 pt, Fett\\
-Überschrift 1 & 1 Einleitung & 12 pt, Fett\\
-Überschrift 2 & 2.1 Titel & 10 pt, Fett\\
+Titel (linksbÃ¼ndig) & Der Titel \ldots & 14 pt, Fett\\
+Ãœberschrift 1 & 1 Einleitung & 12 pt, Fett\\
+Ãœberschrift 2 & 2.1 Titel & 10 pt, Fett\\
 \bottomrule
 \end{tabular}
-\caption{Die Überschriftsarten}
+\caption{Die Ãœberschriftsarten}
 \label{tab:demo}
 \end{table}
 
 \subsection{Programmcode}
-Die LNI-Formatvorlage verlangt die Einrückung von Listings vom linken Rand.
-In der \texttt{lni}-Dokumentenklasse ist dies für die \texttt{verbatim}-Umgebung realisiert.
+Die LNI-Formatvorlage verlangt die EinrÃ¼ckung von Listings vom linken Rand.
+In der \texttt{lni}-Dokumentenklasse ist dies fÃ¼r die \texttt{verbatim}-Umgebung realisiert.
 
 \begin{verbatim}
 public class Hello { 
@@ -307,7 +307,7 @@ public class Hello {
 
 \subsection{Formeln und Gleichungen}
 
-Die korrekte Einrückung und Nummerierung für Formeln ist bei den Umgebungen \texttt{equation} und \texttt{eqnarray} gewährleistet.
+Die korrekte EinrÃ¼ckung und Nummerierung fÃ¼r Formeln ist bei den Umgebungen \texttt{equation} und \texttt{eqnarray} gewÃ¤hrleistet.
 
 \begin{equation}
   1=4-3
@@ -318,11 +318,11 @@ und
   3=2-1
 \end{eqnarray}
 
-\section{Hinweise für Monographien}
+\section{Hinweise fÃ¼r Monographien}
 \label{sec:monographien}
-Für Proceedings und Seminarbände ist die Seitennummerierung, wenn nicht anders vorgegeben, von den HerausgeberInnen vorzunehmen, die einzelnen Beiträge sind von deren AutorInnen also ohne Seitennummerierung vorzulegen; Monographien und Dissertationen sind von der Autorin/ vom Autor zu nummerieren:
+FÃ¼r Proceedings und SeminarbÃ¤nde ist die Seitennummerierung, wenn nicht anders vorgegeben, von den HerausgeberInnen vorzunehmen, die einzelnen BeitrÃ¤ge sind von deren AutorInnen also ohne Seitennummerierung vorzulegen; Monographien und Dissertationen sind von der Autorin/ vom Autor zu nummerieren:
 \begin{itemize}
-\item Vorwort, Inhaltsverzeichnis und Beiträge beginnen grundsätzlich auf einer rechten Seite, ggf.\ ist also eine Leerseite einzufügen.
+\item Vorwort, Inhaltsverzeichnis und BeitrÃ¤ge beginnen grundsÃ¤tzlich auf einer rechten Seite, ggf.\ ist also eine Leerseite einzufÃ¼gen.
 \item Die Seitennummer des ersten Beitrages errechnet sich aus der Seitenzahl der \enquote{Startseiten} + 1
 \item Die \enquote{Startseiten} (Muster siehe Anlage in der HerausgeberInnen-Information) bestehen aus:
 \begin{itemize}
@@ -331,7 +331,7 @@ Für Proceedings und Seminarbände ist die Seitennummerierung, wenn nicht anders v
 \item 3.\ Seite (rechts): Titelblatt
 \item 4.\ Seite (links): Bibliographische Angaben
 \item 5.\ Seite ff (rechts): Vorwort
-\item Anschließend an das Vorwort auf neuer Seite (links oder rechts): Angaben zur Tagungsleitung, zum Programmkomitee oder Organisationsteam, etc. Hier können auch Logos von SponsorInnen und VeranstaltungspartnerInnen abgedruckt werden.
+\item AnschlieÃŸend an das Vorwort auf neuer Seite (links oder rechts): Angaben zur Tagungsleitung, zum Programmkomitee oder Organisationsteam, etc. Hier kÃ¶nnen auch Logos von SponsorInnen und VeranstaltungspartnerInnen abgedruckt werden.
 \item Beginnend auf einer rechten (ungerade nummerierten) Seite: Inhaltsverzeichnis
 \end{itemize}
 \end{itemize}
