@@ -5,7 +5,7 @@ In addition to the [official LNI template], it offers following features:
 
  * enable the most recent hyphenation patterns for German text
  * clean copy and paste of ligatures (e.g., "workflow" stays "workflow" after copying from the PDF).
- * automatic setting of "Fig." and "Section"/"Sect." according to the LNCS style. Just use `\Cref{sec:xy}` at the beginning of a sentence and `\cref{sec:xy}` in the middle of a sentence. Thanx to [cleveref](https://www.ctan.org/pkg/cleveref).
+ * automatic setting of "Fig." and "Section"/"Sect." according to the LNI style. Just use `\Cref{sec:xy}` at the beginning of a sentence and `\cref{sec:xy}` in the middle of a sentence. Thanx to [cleveref](https://www.ctan.org/pkg/cleveref).
  * [microtypographic extensions](https://www.ctan.org/pkg/microtype) for a better look of the paper.
  * support of `\powerset`.
  * support of hyperlinked references without extra color thanx to [hyperref](https://www.ctan.org/pkg/hyperref).
@@ -46,13 +46,18 @@ If you have, just add https://github.com/latextemplates/LNI.git as upstream and 
 
 1. Open command line
 1. `git clone https://github.com/latextemplates/LNI.git`
-1. `cd LNCS`
+1. `cd LNI`
 1. `git remote rename origin upstream`
 1. `git checkout -b master`
 
 After that you can use and push the `master` branch as usual.
 Notes on syncing with the upstream repository [are available from GitHub](https://help.github.com/articles/syncing-a-fork/).
 Note that we decided to call the upstream branch `template` to have a clear distinction between the real content (maintained in your `master` branch) and the template (maintained in the `template` branch).
+
+## Links
+
+ * German: Hinweise zu Ausarbeitungen: http://wiki.flupp.de/studium/ausarbeitungen
+ * Other templates: http://latextemplates.github.io/
 
   [LNI]: https://www.gi.de/service/publikationen/lni/autorenrichtlinien.html
   [official LNI template]: https://www.gi.de/fileadmin/redaktion/Autorenrichtlinien/LNI-LaTeX-Vorlage.zip
