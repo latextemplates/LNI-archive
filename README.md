@@ -20,7 +20,11 @@ The official template is available at https://www.gi.de/fileadmin/redaktion/Auto
  * Click on `Download ZIP` or [here](https://github.com/latextemplates/LNI/archive/template.zip).
  * Extract template.zip in the folder where you want to write your paper.
  * Edit [paper.tex](paper.tex).
- * `latexmk paper`.
+ * Run `pdflatex -synctex=1 paper`.
+ * Run `bibtex paper`.
+ * Run `pdflatex -synctex=1 paper`.
+
+latexmk currently does not work, because of https://github.com/latextemplates/LNI/issues/1.
 
 ## Benefits in comparison to GI e.V.'s version
 
