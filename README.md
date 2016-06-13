@@ -1,19 +1,6 @@
 # Simplified LNI Template
 
 This repository aims to provide a quick start for modern LaTeXing with [LNI].
-In addition to the [official LNI template], it offers following features:
-
- * enable the most recent hyphenation patterns for German text
- * clean copy and paste of ligatures (e.g., "workflow" stays "workflow" after copying from the PDF).
- * automatic setting of "Fig." and "Section"/"Sect." according to the LNI style. Just use `\Cref{sec:xy}` at the beginning of a sentence and `\cref{sec:xy}` in the middle of a sentence. Thanx to [cleveref](https://www.ctan.org/pkg/cleveref).
- * [microtypographic extensions](https://www.ctan.org/pkg/microtype) for a better look of the paper.
- * support of `\powerset`.
- * support of hyperlinked references without extra color thanx to [hyperref](https://www.ctan.org/pkg/hyperref).
- * better breaking of URLs.
- * sharper font.
- * removed `sty` files: These are provided by all modern LaTeX distributions.
-
-The official template is available at https://www.gi.de/fileadmin/redaktion/Autorenrichtlinien/LNI-LaTeX-Vorlage.zip.
 
 ## Quick start
 
@@ -24,15 +11,21 @@ The official template is available at https://www.gi.de/fileadmin/redaktion/Auto
  * Run `bibtex paper`.
  * Run `pdflatex -synctex=1 paper`.
 
-latexmk currently does not work, because of https://github.com/latextemplates/LNI/issues/1.
+[latexmk] currently does not work, because of https://github.com/latextemplates/LNI/issues/1.
 
 ## Benefits in comparison to GI e.V.'s version
+In addition to the [official LNI template], it offers following features:
 
-* Provides a skeletal [paper.tex](paper.tex) file
-* Adds modern packages such as [microtype], [cleveref], [csquotes], [hyperref], [hypcap], [booktabs]
-* Support of copy and paste from the generated PDF: Glyphs are encoded using unicode characters.
-* Support for `\powerset` command
-* Generated PDF allows for copy and paste of text without getting words with ligatures such as "workflow" destroyed
+ * Enables most recent hyphenation patterns for German text
+ * Clean copy and paste of ligatures (e.g., "workflow" stays "workflow" after copying from the PDF).
+ * Automatic setting of "Fig." and "Section"/"Sect." according to the LNI style. Just use `\Cref{sec:xy}` at the beginning of a sentence and `\cref{sec:xy}` in the middle of a sentence. Thanx to [cleveref].
+ * [microtypographic extensions](https://www.ctan.org/pkg/microtype) for a better look of the paper.
+ * Support of `\powerset`.
+ * Support of hyperlinked references without extra color thanx to [hyperref].
+ * Better breaking of URLs.
+ * Removed `sty` files: These are provided by all modern LaTeX distributions.
+ * Adds modern packages such as [csquotes], [hypcap], [booktabs].
+ * Provides a skeletal [paper.tex](paper.tex) file.
 
 ## Tool hints
 Grammar and spell checking is available at [TeXstudio].
@@ -60,8 +53,8 @@ Note that we decided to call the upstream branch `template` to have a clear dist
 
 ## Links
 
- * German: Hinweise zu Ausarbeitungen: http://wiki.flupp.de/studium/ausarbeitungen
  * Other templates: http://latextemplates.github.io/
+ * German: Hinweise zu Ausarbeitungen: http://wiki.flupp.de/studium/ausarbeitungen
 
   [LNI]: https://www.gi.de/service/publikationen/lni/autorenrichtlinien.html
   [official LNI template]: https://www.gi.de/fileadmin/redaktion/Autorenrichtlinien/LNI-LaTeX-Vorlage.zip
@@ -72,6 +65,8 @@ Note that we decided to call the upstream branch `template` to have a clear dist
   [hypcap]: https://www.ctan.org/pkg/hypcap
   [hyperref]: https://ctan.org/pkg/hyperref
   [microtype]: https://ctan.org/pkg/microtype
+  
+  [latexmk]: https://www.ctan.org/pkg/latexmk/
 
   [JabRef]: http://www.jabref.org
   [LanguageTool]: https://languagetool.org/
