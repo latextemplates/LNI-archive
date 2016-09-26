@@ -92,11 +92,6 @@ Vorname1 Nachname1 und Vorname2 Nachname2}
 
 %tweak \url{...}
 \usepackage{url}
-%nicer // - solution by http://tex.stackexchange.com/a/98470/9075
-\makeatletter
-\def\Url@twoslashes{\mathchar`\/\@ifnextchar/{\kern-.2em}{}}
-\g@addto@macro\UrlSpecials{\do\/{\Url@twoslashes}}
-\makeatother
 \urlstyle{same}
 %improve wrapping of URLs - hint by http://tex.stackexchange.com/a/10419/9075
 \makeatletter
