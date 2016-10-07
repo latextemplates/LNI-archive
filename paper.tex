@@ -79,13 +79,8 @@ Vorname1 Nachname1 und Vorname2 Nachname2}
 % Listingname heißt nun List.
 \renewcommand{\lstlistingname}{List.}
 
-%for easy quotations: \enquote{text}
-\usepackage{csquotes}
-
 \usepackage[T1]{fontenc}
 
-%enable margin kerning
-\usepackage{microtype}
 
 %for demonstration purposes only
 \usepackage[math]{blindtext}
@@ -107,6 +102,14 @@ Vorname1 Nachname1 und Vorname2 Nachname2}
 %required for pdfcomment later
 \usepackage{xcolor}
 
+%for easy quotations: \enquote{text}
+%also required by biblatex
+\usepackage{csquotes}
+\usepackage[
+  backend=biber,
+  style=LNI_biblatex/LNI
+]{biblatex}
+
 % new packages BEFORE hyperref
 % See also http://tex.stackexchange.com/questions/1863/which-packages-should-be-loaded-after-hyperref-instead-of-before
 
@@ -127,6 +130,18 @@ pdfstartview=Fit
 ]{hyperref}
 %enables correct jumping to figures when referencing
 \usepackage[all]{hypcap}
+%enable hyperlinked author names when using \citeauthor
+%source: http://tex.stackexchange.com/a/75916/9075
+\DeclareCiteCommand{\citeauthor}
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\ifciteindex
+     {\indexnames{labelname}}
+     {}%
+   \printtext[bibhyperref]{\printnames{labelname}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 
 %enable nice comments
 \usepackage{pdfcomment}
@@ -171,6 +186,10 @@ pdfstartview=Fit
 \renewcommand{\floatpagefraction}{0.35}
 \setcounter{totalnumber}{5}
 
+%enable margin kerning
+%currently does not work with pdflatex
+%\usepackage{microtype}
+
 % correct bad hyphenation here
 \hyphenation{net-works semi-conduc-tor}
 
@@ -186,6 +205,9 @@ Vorname2 Nachname2\footnote{Einrichtung/Universität, Abteilung, Anschrift, Post
 und weitere Autorinnen und Autoren in der gleichen Notation}
 
 \title{Der Titel des Beitrags, der auch etwas länger sein und über zwei Zeilen reichen kann}
+
+
+\bibliography{paper}
 
 \begin{document}
 \maketitle
@@ -331,9 +353,8 @@ Für Proceedings und Seminarbände ist die Seitennummerierung, wenn nicht anders
 \end{itemize}
 \end{itemize}
 
-%DO NOT USE \bibliographystyle - is is already done in lni.cls
-%\bibliographystyle{lnig}
-
-\bibliography{paper}
+%No \bibliography{paper} allowed here - biblatex expects it at the preamble
+%Run `biber paper` to generate the bibliography
+\printbibliography
 
 \end{document}
