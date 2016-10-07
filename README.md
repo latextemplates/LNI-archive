@@ -2,18 +2,21 @@
 
 This repository aims to provide a quick start for modern LaTeXing with [LNI].
 
+**This version requires [biblatex](https://www.ctan.org/pkg/biblatex?lang=de) for the bibliography**
+
 ## Quick start
 
  * Click on `Download ZIP` or [here](https://github.com/latextemplates/LNI/archive/template.zip).
  * Extract template.zip in the folder where you want to write your paper.
  * Edit [paper.tex](paper.tex).
  * Run `pdflatex -synctex=1 paper`.
- * Run `bibtex paper`.
+ * Run `biber paper`.
  * Run `pdflatex -synctex=1 paper`.
 
 [latexmk] currently does not work, because of https://github.com/latextemplates/LNI/issues/1.
 
 ## Benefits in comparison to GI e.V.'s version
+
 In addition to the [official LNI template], it offers following features:
 
  * Enables most recent hyphenation patterns for German text
@@ -26,6 +29,7 @@ In addition to the [official LNI template], it offers following features:
  * Removed `sty` files: These are provided by all modern LaTeX distributions.
  * Adds modern packages such as [csquotes], [hypcap], [booktabs].
  * Provides a skeletal [paper.tex](paper.tex) file.
+ * Support of [biblatex]
 
 ## Tool hints
 Grammar and spell checking is available at [TeXstudio].
@@ -59,6 +63,7 @@ Note that we decided to call the upstream branch `template` to have a clear dist
   [LNI]: https://www.gi.de/service/publikationen/lni/autorenrichtlinien.html
   [official LNI template]: https://www.gi.de/fileadmin/redaktion/Autorenrichtlinien/LNI-LaTeX-Vorlage.zip
 
+  [biblatex]: https://www.ctan.org/pkg/biblatex?lang=de
   [booktabs]: https://www.ctan.org/pkg/booktabs
   [cleveref]: https://ctan.org/pkg/cleveref
   [csquotes]: https://www.ctan.org/pkg/csquotes
