@@ -4,16 +4,16 @@ This repository aims to provide a quick start for modern LaTeXing with [LNI].
 
 **This version requires [biblatex](https://www.ctan.org/pkg/biblatex?lang=de) for the bibliography**
 
+
 ## Quick start
 
- * Click on `Download ZIP` or [here](https://github.com/latextemplates/LNI/archive/template.zip).
- * Extract template.zip in the folder where you want to write your paper.
+ * Click on `Download ZIP` or [here](https://github.com/latextemplates/LNI/archive/master.zip).
+ * Extract master.zip in the folder where you want to write your paper.
  * Edit [paper.tex](paper.tex).
- * Run `pdflatex -synctex=1 paper`.
- * Run `biber paper`.
- * Run `pdflatex -synctex=1 paper`.
+ * `latexmk paper`. See [latexmk] for more information.
 
-[latexmk] currently does not work, because of https://github.com/latextemplates/LNI/issues/1.
+If you want to have continuous preview, execute `latexmk -pvc paper`.
+
 
 ## Benefits in comparison to GI e.V.'s version
 
@@ -31,7 +31,9 @@ In addition to the [official LNI template], it offers following features:
  * Provides a skeletal [paper.tex](paper.tex) file.
  * Support of [biblatex]
 
+
 ## Tool hints
+
 Grammar and spell checking is available at [TeXstudio].
 Please download [LanguageTool] and [configure Texstudio to use it](http://wiki.languagetool.org/checking-la-tex-with-languagetool#toc4).
 Note that it is enough to point to `languagetool.jar`.
@@ -39,21 +41,18 @@ Use [JabRef] to manage your bibliography.
 
 If TeXstudio doesn't fit your needs, check [the list of all available LaTeX Editors](http://tex.stackexchange.com/questions/339/latex-editors-ides).
 
+
 ## Using the template with your git repository
 
 ### Initialization
-This howto assumes that you don't have a git repository for your paper yet.
-If you have, just add https://github.com/latextemplates/LNI.git as upstream and merge the branch `template` into your `master` branch.
 
-1. Open command line
-1. `git clone https://github.com/latextemplates/LNI.git`
-1. `cd LNI`
-1. `git remote rename origin upstream`
-1. `git checkout -b master`
+1. Initialize a git repository for your paper
+2. `git remote add template https://github.com/latextemplates/LNI.git`
 
-After that you can use and push the `master` branch as usual.
-Notes on syncing with the upstream repository [are available from GitHub](https://help.github.com/articles/syncing-a-fork/).
-Note that we decided to call the upstream branch `template` to have a clear distinction between the real content (maintained in your `master` branch) and the template (maintained in the `template` branch).
+## Updating
+
+Just execute `git pull -Xtheirs template master`
+
 
 ## Links
 
