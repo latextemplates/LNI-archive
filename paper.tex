@@ -130,18 +130,6 @@ pdfstartview=Fit
 ]{hyperref}
 %enables correct jumping to figures when referencing
 \usepackage[all]{hypcap}
-%enable hyperlinked author names when using \citeauthor
-%source: http://tex.stackexchange.com/a/75916/9075
-\DeclareCiteCommand{\citeauthor}
-  {\boolfalse{citetracker}%
-   \boolfalse{pagetracker}%
-   \usebibmacro{prenote}}
-  {\ifciteindex
-     {\indexnames{labelname}}
-     {}%
-   \printtext[bibhyperref]{\printnames{labelname}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
 
 %enable nice comments
 \usepackage{pdfcomment}
