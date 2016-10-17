@@ -2,8 +2,9 @@
 
 This repository aims to provide a quick start for modern LaTeXing with [LNI].
 
-**This version requires [biblatex](https://www.ctan.org/pkg/biblatex?lang=de) for the bibliography**
-
+This version requires:
+  * [biblatex](https://github.com/plk/biblatex#overview) and
+  * [biblatex-lni](https://github.com/latextemplates/biblatex-lni/blob/master/README.md#biblatex-lni) for the bibliography
 
 ## Quick start
 
