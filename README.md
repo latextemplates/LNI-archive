@@ -19,7 +19,9 @@ If you want to have continuous preview, execute `latexmk -pvc paper`.
 ## Installation hints for Ubuntu
 
 Ubuntu currently [ships biber 2.4](https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1589644), so you have to upgrade your texlive distribution.
-Please follow the instructions given at http://tex.stackexchange.com/a/55459/9075
+The easiest way is to uninstall the ubuntu package and use [install-tl-ubuntu](https://github.com/scottkosty/install-tl-ubuntu).
+Then, you can follow the instructions given at http://tex.stackexchange.com/a/55459/9075 to update your tex live distribution.
+If you do not want to have an updated installation, but fiddle around with dirty patching your installation, please follow  http://tex.stackexchange.com/questions/84624/how-to-upgrade-biblatex-properly.
 
 ## Benefits in comparison to GI e.V.'s version
 
