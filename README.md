@@ -16,6 +16,10 @@ This version requires:
 
 If you want to have continuous preview, execute `latexmk -pvc paper`.
 
+## Installation hints for Ubuntu
+
+Ubuntu currently [ships biber 2.4](https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1589644), so you have to upgrade your texlive distribution.
+Please follow the instructions given at http://tex.stackexchange.com/a/55459/9075
 
 ## Benefits in comparison to GI e.V.'s version
 
