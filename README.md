@@ -3,7 +3,8 @@
 This repository aims to provide a quick start for modern LaTeXing with [LNI].
 
 This version requires:
-  * [biblatex](https://github.com/plk/biblatex#overview) and
+  * [biblatex](https://github.com/plk/biblatex#overview) (at least 3.5),
+  * [biber](https://github.com/plk/biber#overview) (at leats 2.6), and
   * [biblatex-lni](https://github.com/latextemplates/biblatex-lni/blob/master/README.md#biblatex-lni) for the bibliography
 
 ## Quick start
