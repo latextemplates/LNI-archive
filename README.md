@@ -2,10 +2,15 @@
 
 This repository aims to provide a quick start for modern LaTeXing with [LNI].
 
+This version does not require biblatex, but still suffers from a broken `lni.bst`.
+This is a known issue (https://github.com/latextemplates/LNI/issues/1).
+The current fix is to switch to biber and to use [biblatex-lni].
+In case, your LaTeX installation is uptodate, it is recommended to switch to https://github.com/latextemplates/LNI.
+
 ## Quick start
 
- * Click on `Download ZIP` or [here](https://github.com/latextemplates/LNI/archive/template.zip).
- * Extract template.zip in the folder where you want to write your paper.
+ * Click on `Download ZIP` or [here](https://github.com/latextemplates/LNI/archive/lni-bibtex.zip).
+ * Extract lni-bibtex.zip in the folder where you want to write your paper.
  * Edit [paper.tex](paper.tex).
  * Run `pdflatex -synctex=1 paper`.
  * Run `bibtex paper`.
@@ -59,6 +64,7 @@ Note that we decided to call the upstream branch `template` to have a clear dist
   [LNI]: https://www.gi.de/service/publikationen/lni/autorenrichtlinien.html
   [official LNI template]: https://www.gi.de/fileadmin/redaktion/Autorenrichtlinien/LNI-LaTeX-Vorlage.zip
 
+  [biblatex-lni]: https://github.com/latextemplates/biblatex-lni
   [booktabs]: https://www.ctan.org/pkg/booktabs
   [cleveref]: https://ctan.org/pkg/cleveref
   [csquotes]: https://www.ctan.org/pkg/csquotes
