@@ -7,6 +7,8 @@ This version requires:
   * [biber](https://github.com/plk/biber#overview) (at leats 2.6), and
   * [biblatex-lni](https://github.com/latextemplates/biblatex-lni/blob/master/README.md#biblatex-lni) for the bibliography
 
+In case you cannot update to the latest version of bibtex (instruction are given below), you find an old version using bibtex at https://github.com/latextemplates/LNI/tree/lni-bibtex. Be aware that lni.bst is broken (https://github.com/latextemplates/LNI/issues/1), but still produces a correct bibliography.
+
 ## Quick start
 
  * Click on `Download ZIP` or [here](https://github.com/latextemplates/LNI/archive/master.zip).
