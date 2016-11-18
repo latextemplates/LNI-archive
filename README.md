@@ -21,7 +21,7 @@ If you want to have continuous preview, execute `latexmk -pvc paper`.
 ## Trouble shooting
 
 * biber/biblatex too old -> see installation hints of how to update them at different systems
-* `! pdfTeX error (font expansion): auto expansion is only possible with scalable fonts.` -> Install the `cm-super` package using the MiKTeX package manager. Then, run `initexmf --mkmaps` on the command line. (Source: http://tex.stackexchange.com/a/310169/9075)
+* `! pdfTeX error (font expansion): auto expansion is only possible with scalable fonts.` -> Install the `cm-super` package using the MiKTeX package manager. Then, run `initexmf --mkmaps` on the command line. (Long description: http://tex.stackexchange.com/a/324972/9075)
 
 ## Installation hints for Windows
 
