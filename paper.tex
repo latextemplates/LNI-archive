@@ -1,114 +1,47 @@
-% Currently this document is written in German
-% !TeX spellcheck = de_DE
+% Currently this document is written in English
+% !TeX spellcheck = en_US
 
 %Ensure that all odl school LaTeX habits are remarked
 \RequirePackage[l2tabu, orthodox]{nag}
-%Neue deutsche Trennmuster
-%Siehe http://www.ctan.org/pkg/dehyph-exptl und http://projekte.dante.de/Trennmuster/WebHome
-%Nur für pdflatex, nicht für lualatex
-\RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
-\documentclass{lni}
-% in Englisch stattdessen:
-%\documentclass[english]{lni}
 
-
-
-
-
-
-
-%% Some packages, no need to be adabted
-
-% enable copy and paste of ligatures (e.g., in "workflow" and umlauts)
-\usepackage{cmap}
-
-%Überschrift des Literaturverzeichnisses
-%Only in German
-\iflnienglish
-\else
-\renewcommand{\refname}{Literaturverzeichnis}
-\fi
-
-%Enable input of umlauts using UTF-8.
-\usepackage[utf8]{inputenc}
-
-\usepackage{graphicx}
-
-\usepackage{fancyhdr}
-
-%Kopf- und Fußzeileneinstellungen
-\fancypagestyle{lnifirstpage}{
-% Löscht alle Kopf- und Fußzeileneinstellungen
-\fancyhf{}
-
-%Kopfzeile
-\fancyhead[RO]{\small Einreichung für: <Konferenz/Workshop>,\linebreak%
-Geplant als Veröffentlichung innerhalb der Lecture Notes in Informatics (LNI)
-}
-%Für den Herausgeber:
-%\fancyhead[RO]{\small <Vorname Nachname [et.\ al.\ ]>(Hrsg.): <Buchtitel>,\linebreak%
-%Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn <Jahr> \hspace{5pt} \thepage \hspace{0.05cm}}
-
-%Linie unter Kopfzeile
-\renewcommand{\headrulewidth}{0.4pt}
-}
-
-% Put in the short title (Kurztitle) here
-\fancypagestyle{lni}{
-\fancyhf{}
-%Zu lange Titel müssen von den HerausgeberInnen gekürzt werden, Vorschläge der AutorInnen dazu sind herzlich willkommen.
-\fancyhead[RO]{\small Der Kurztitel \hspace{5pt}
-\thepage \hspace{0.05cm}}
-\fancyhead[LE]{\hspace{0.05cm}\small \thepage \hspace{5pt}
-%Bis zu drei AutorInnen werden alle angeführt, darüber hinaus wird nur die erste Autorin bzw. der erste Autor angeführt und alle Weiteren mit et al.\ abgekürzt.
-%Zu lange AutorInnenlisten müssen von den HerausgeberInnen gekürzt werden.
-Vorname1 Nachname1 und Vorname2 Nachname2}
-\renewcommand{\headrulewidth}{0.4pt}
-}
-
-%if lstlistings is used
-%better approach: use the minted package - see https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings#The_minted_package
-\usepackage{listings}
-
-\iflnienglish
-\usepackage[figurename=Fig., tablename=Tab., font=small]{caption}
-\else
-\usepackage[figurename=Abb., tablename=Tab., font=small]{caption}
-\fi
-
-% Listingname heißt nun List.
-\renewcommand{\lstlistingname}{List.}
-
-\usepackage[T1]{fontenc}
-
-
-%for demonstration purposes only
-\usepackage[math]{blindtext}
-
-%tweak \url{...}
-\usepackage{url}
-\urlstyle{same}
-%improve wrapping of URLs - hint by http://tex.stackexchange.com/a/10419/9075
-\makeatletter
-\g@addto@macro{\UrlBreaks}{\UrlOrds}
-\makeatother
+%German: remove "english"
+\documentclass[english,utf8]{lni}
 
 %diagonal lines in a table - http://tex.stackexchange.com/questions/17745/diagonal-lines-in-table-cell
 %slashbox is not available in texlive (due to licensing) and also gives bad results. Thus, we use diagbox
 %\usepackage{diagbox}
 
+% Nice tables using \toprule, \midrule, \bottomrule
 \usepackage{booktabs}
 
-%required for pdfcomment later
-\usepackage{xcolor}
+%for demonstration purposes only
+\usepackage[math]{blindtext}
+
+
+%% Begin: Biblatex
+%% Aims: No errors, when bibtexing; UTF8 in bibliography; enablement of \citet{key}
 
 %for easy quotations: \enquote{text}
 %also required by biblatex
 \usepackage{csquotes}
 \usepackage[
-  backend=biber,
-  style=LNI
+  backend=biber, % UTF-8 support
+  style=LNI,     % The GI style - see https://www.ctan.org/pkg/biblatex-lni
+  natbib=true    % Requried for \Citet
 ]{biblatex}
+
+% Enable hyperlinked authors when using \citeauthor
+% Source: http://tex.stackexchange.com/a/75916/9075
+\DeclareCiteCommand{\citeauthor}
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\ifciteindex
+     {\indexnames{labelname}}
+     {}%
+   \printtext[bibhyperref]{\printnames{labelname}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 
 %If you want to quickly reuse an existing bibliography:
 
@@ -130,99 +63,69 @@ Vorname1 Nachname1 und Vorname2 Nachname2}
   }%
 }
 \fi
+%% End: Biblatex
 
-% new packages BEFORE hyperref
-% See also http://tex.stackexchange.com/questions/1863/which-packages-should-be-loaded-after-hyperref-instead-of-before
 
-%enable hyperref without colors and without bookmarks
-\usepackage[
-%pdfauthor={},
-%pdfsubject={},
-%pdftitle={},
-%pdfkeywords={},
-bookmarks=false,
-breaklinks=true,
-colorlinks=true,
-linkcolor=black,
-citecolor=black,
-urlcolor=black,
-pdfpagelayout=SinglePage,
-pdfstartview=Fit
-]{hyperref}
-%enables correct jumping to figures when referencing
-\usepackage[all]{hypcap}
+%% Begin: Cleveref
+%% Aim: Include reference type in reference. Use \cref{fig:xy} instead of Fig.~\ref{fig:xy}
 
-%enable nice comments
+\iflnienglish
+\usepackage[capitalise,nameinlink]{cleveref}
+\crefname{section}{Sect.}{Sect.}
+\Crefname{section}{Sect.}{Sect.}
+\else
+\usepackage[ngerman,capitalise,nameinlink]{cleveref}
+\fi
+
+\crefname{figure}{\figurename}{\figurename}
+\Crefname{figure}{\figurename}{\figurename}
+
+\crefname{listing}{\lstlistingname}{\lstlistingname}
+\Crefname{listing}{\lstlistingname}{\lstlistingname}
+
+\crefname{table}{\tablename}{\tablename}
+\Crefname{table}{\tablename}{\tablename}
+%% End: Cleveref
+
+
+%% Begin: pdfcomment
+%% Aim: enable nice comments by \todo{...}
+
+\usepackage{xcolor}
 \usepackage{pdfcomment}
 \newcommand{\commentontext}[2]{\colorbox{yellow!60}{#1}\pdfcomment[color={0.234 0.867 0.211},hoffset=-6pt,voffset=10pt,opacity=0.5]{#2}}
 \newcommand{\commentatside}[1]{\pdfcomment[color={0.045 0.278 0.643},icon=Note]{#1}}
 
 %compatibality with TODO package
 \newcommand{\todo}[1]{\commentatside{#1}}
+%% End: pdfcomment
 
-%enable \cref{...} and \Cref{...} instead of \ref: Type of reference included in the link
-\iflnienglish
-\usepackage[capitalise,nameinlink]{cleveref}
-%Nice formats for \cref
-\crefname{section}{Sect.}{Sect.}
-\Crefname{section}{Section}{Sections}
-\crefname{figure}{Fig.}{Fig.}
-\Crefname{figure}{Figure}{Figures}
-\else
-\usepackage[ngerman,capitalise,nameinlink]{cleveref}
-\fi
-
-%introduce \powerset - hint by http://matheplanet.com/matheplanet/nuke/html/viewtopic.php?topic=136492&post_id=997377
-\DeclareFontFamily{U}{MnSymbolC}{}
-\DeclareSymbolFont{MnSyC}{U}{MnSymbolC}{m}{n}
-\DeclareFontShape{U}{MnSymbolC}{m}{n}{
-    <-6>  MnSymbolC5
-   <6-7>  MnSymbolC6
-   <7-8>  MnSymbolC7
-   <8-9>  MnSymbolC8
-   <9-10> MnSymbolC9
-  <10-12> MnSymbolC10
-  <12->   MnSymbolC12%
-}{}
-\DeclareMathSymbol{\powerset}{\mathord}{MnSyC}{180}
-
-%improve float placement
-%source: http://people.cs.uu.nl/piet/floats/node1.html
-%see also: http://tex.stackexchange.com/a/35130/9075
-\renewcommand{\textfraction}{0.05}
-\renewcommand{\topfraction}{0.95}
-\renewcommand{\bottomfraction}{0.95}
-\renewcommand{\floatpagefraction}{0.35}
-\setcounter{totalnumber}{5}
-
-%enable margin kerning
-\usepackage{microtype}
 
 % correct bad hyphenation here
 \hyphenation{net-works semi-conduc-tor}
 
 
+
 %%% Adapt to your needs from here
 
 %Beginn der Seitenzählung für diesen Beitrag
-\setcounter{page}{1}
+%Wird für die Druckfassung angepasst
+\startpage{1}
 
-\author{
-Vorname1 Nachname1\footnote{Einrichtung/Universität, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author1}, \,
-Vorname2 Nachname2\footnote{Einrichtung/Universität, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author2}, \,
+\editor{Vorname Nachname et al.}
+\booktitle{Konferenztitel}
+
+\author[Vorname1 Nachname1 \and Vorname2 Nachname2]{
+Vorname1 Nachname1\footnote{Einrichtung/Universität, Abteilung, Anschrift, Postleitzahl Ort, \email{emailadresse@author1}} \and
+Vorname2 Nachname2\footnote{Einrichtung/Universität, Abteilung, Anschrift, Postleitzahl Ort, \email{emailadresse@author2}} \and
 und weitere Autorinnen und Autoren in der gleichen Notation}
 
-\title{Der Titel des Beitrags, der auch etwas länger sein und über zwei Zeilen reichen kann}
-
+\title[Kurztitel für die Kopfzeile]{Der Titel des Beitrags, der auch etwas länger sein und über zwei Zeilen reichen kann}
 
 \bibliography{paper}
 
 \begin{document}
 \maketitle
-
-%hint by http://tex.stackexchange.com/a/30229/9075 and http://tex.stackexchange.com/a/247652/9075
-\thispagestyle{lnifirstpage}
-\pagestyle{lni}
 
 %Auf Anzahl der AutorInnen setzen, damit die weitere Nummerierung der Fußnoten passt
 %Dieser Befehl \verb|\setcounter{footnote}{2}| legt in dem Fall fest, dass 2 Fußnotennummern bereits für die AutorInnen verbraucht wurden, damit die darauf folgenden Fußnoten mit der richtigen Nummerierung (ab 3) fortfahren. Dieser Wert muss an die jeweilige Zahl an AutorInnen bzw. bereits verbrauchte Fußnoten angepasst werden, sofern im weiteren Verlauf Fußnoten verwendet werden.
@@ -243,17 +146,17 @@ LNI Guidelines, \LaTeX Vorlage. Die Formatierung erfolgt automatisch innerhalb d
 Die GI gibt unter \url{http://www.gi-ev.de/LNI} Vorgaben für die Formatierung von Dokumenten in der LNI Reihe.
 Für \LaTeX-Dokumente werden diese durch die Dokumentenklasse \texttt{lni} realisiert.
 
-Dieses Dokument basiert auf der offiziellen Dokumentation, aber wurde entsprechend der aktuellen Vorlage und den eingebundenen Paketen aktualisiert.
+Dieses Dokument basiert auf der offiziellen Dokumentation und wurde sowohl entsprechend der aktuellen Vorlage und den eingebundenen Paketen aktualisiert.
+Insbesondere wurden die Verbesserungen von Martin Sievers von \url{https://github.com/sieversMartin/LNI} übernommen.
 Die aktuelle Version wird unter \url{https://github.com/latextemplates/LNI} gepflegt.
-Es werden (nach Möglichkeit) die aktuellen Versionen von der GI eingebunden.
+Es werden die aktuellen Versionen von der GI eingebunden.
 
 Diese Dokumentation simplifiziert und setzt grundlegendes LaTeX-Wissen voraus.
-Es werden generische Platzhalter an die entsprechenden Stellen (wie Beispielsweise Author) gesetzt und nicht weiter an anderer Stelle dokumentiert.
+Es werden generische Platzhalter an die entsprechenden Stellen (wie beispielsweise die Authoren-Anganben) gesetzt und nicht weiter an anderer Stelle dokumentiert.
 
 Dieses Template ist wie folgt gegliedert:
 \Cref{sec:demos} zeigt Demonstrationen der Verbesserung von GitHub-LNI gegenüber der originalen Vorlage.
 \Cref{sec:lniconformance} zeigt die Einhaltung der Richtlinien durch einfachen Text.
-\Cref{sec:monographien} enthält Hinweise für Monographien. Diese kommen zum Einsatz, wenn \emph{kein} Tagungsbandbeitrag verfasst wird, sondern eine Dissertation oder ähnliches.
 
 \section{Demonstrationen}
 \label{sec:demos}
@@ -270,6 +173,10 @@ See \href{https://www.ctan.org/pkg/microtype}{microtype} in action here:
 
 \subsection{Literaturverzeichnis}
 Der letzte Abschnitt zeigt ein beispielhaftes Literaturverzeichnis für Bücher mit einem Autor \cite{Ez10} und zwei AutorInnen \cite{AB00}, einem Beitrag in Proceedings mit drei AutorInnen \cite{ABC01}, einem Beitrag in einem LNI Band mit mehr als drei AutorInnen \cite{Az09}, zwei Bücher mit den jeweils selben vier AutorInnen im selben Erscheinungsjahr \cite{Wa14} und \cite{Wa14b}, ein Journal \cite{Gl06}, eine Website \cite{GI14} bzw.\ anderweitige Literatur ohne konkrete AutorInnenschaft \cite{XX14}.
+\todo{Es wird biblatex verwendet, da es UTF8 sauber unterstützt und im Gegensatz zu lni.bst keine Fehler beim bibtexen auftreten.}
+
+Referenzen sollten nicht direkt als Subjekt eingebunden werden, sondern immer nur durch Authorenanganben:
+Beispiel: \commentontext{\Citet{AB00}}{Großes C bei Citet, wenn es am Satzanfang steht. Analog zu Cref.} geben ein Beispiel, aber auch \citet{Az09}.
 
 Formatierung und Abkürzungen werden für die Referenzen \texttt{book}, \texttt{inbook}, \texttt{proceedings}, \texttt{inproceedings}, \texttt{article}, \texttt{online} und \texttt{misc} automatisch vorgenommen.
 Mögliche Felder für Referenzen können der Beispieldatei \texttt{paper.bib} entnommen werden.
@@ -342,24 +249,6 @@ und
   2=7-5\\
   3=2-1
 \end{eqnarray}
-
-\section{Hinweise für Monographien}
-\label{sec:monographien}
-Für Proceedings und Seminarbände ist die Seitennummerierung, wenn nicht anders vorgegeben, von den HerausgeberInnen vorzunehmen, die einzelnen Beiträge sind von deren AutorInnen also ohne Seitennummerierung vorzulegen; Monographien und Dissertationen sind von der Autorin/ vom Autor zu nummerieren:
-\begin{itemize}
-\item Vorwort, Inhaltsverzeichnis und Beiträge beginnen grundsätzlich auf einer rechten Seite, ggf.\ ist also eine Leerseite einzufügen.
-\item Die Seitennummer des ersten Beitrages errechnet sich aus der Seitenzahl der \enquote{Startseiten} + 1
-\item Die \enquote{Startseiten} (Muster siehe Anlage in der HerausgeberInnen-Information) bestehen aus:
-\begin{itemize}
-\item 1.\ Seite (rechts): GI-Logo
-\item 2.\ Seite (links): leer
-\item 3.\ Seite (rechts): Titelblatt
-\item 4.\ Seite (links): Bibliographische Angaben
-\item 5.\ Seite ff (rechts): Vorwort
-\item Anschließend an das Vorwort auf neuer Seite (links oder rechts): Angaben zur Tagungsleitung, zum Programmkomitee oder Organisationsteam, etc. Hier können auch Logos von SponsorInnen und VeranstaltungspartnerInnen abgedruckt werden.
-\item Beginnend auf einer rechten (ungerade nummerierten) Seite: Inhaltsverzeichnis
-\end{itemize}
-\end{itemize}
 
 %No \bibliography{paper} allowed here - biblatex expects it at the preamble
 %Run `biber paper` to generate the bibliography
