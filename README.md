@@ -19,18 +19,24 @@ In case, your LaTeX installation is uptodate, it is recommended to switch to htt
 [latexmk] currently does not work, because of https://github.com/latextemplates/LNI/issues/1.
 
 ## Benefits in comparison to GI e.V.'s version
-In addition to the [official LNI template], it offers following features:
+
+The [official LNI template] is updated at <https://github.com/sieversMartin/LNI/>, which is approved by GI and offers following benefits:
 
  * Enables most recent hyphenation patterns for German text
  * Clean copy and paste of ligatures (e.g., "workflow" stays "workflow" after copying from the PDF).
- * Automatic setting of "Fig." and "Section"/"Sect." according to the LNI style. Just use `\Cref{sec:xy}` at the beginning of a sentence and `\cref{sec:xy}` in the middle of a sentence. Thanx to [cleveref].
  * [microtypographic extensions](https://www.ctan.org/pkg/microtype) for a better look of the paper.
  * Support of `\powerset`.
  * Support of hyperlinked references without extra color thanx to [hyperref].
  * Better breaking of URLs.
  * Removed `sty` files: These are provided by all modern LaTeX distributions.
- * Adds modern packages such as [csquotes], [hypcap], [booktabs].
- * Provides a skeletal [paper.tex](paper.tex) file.
+ * Adds modern packages such as [hypcap].
+ * Provides a skeletal [lni-author-template.tex](https://github.com/sieversMartin/LNI/blob/master/lni-author-template.tex) file demonstrating the template.
+
+In addition, this template offers following benefits:
+
+ * Automatic setting of "Fig." and "Section"/"Sect." according to the LNI style. Just use `\Cref{sec:xy}` at the beginning of a sentence and `\cref{sec:xy}` in the middle of a sentence. Thanx to [cleveref].
+ * Adds modern packages such as [csquotes] and [booktabs].
+ * Provides a skeletal [paper.tex](paper.tex) file demonstrating cleveref and booktabs.
 
 ## Tool hints
 Grammar and spell checking is available at [TeXstudio].
