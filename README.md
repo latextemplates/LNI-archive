@@ -7,7 +7,7 @@ This version requires:
   * [biber](https://github.com/plk/biber#overview) (at least 2.6), and
   * [biblatex-lni](https://github.com/latextemplates/biblatex-lni/blob/master/README.md#biblatex-lni) for the bibliography
 
-In case you cannot update to the latest version of bibtex (instruction are given below), you find an old version using bibtex at https://github.com/latextemplates/LNI/tree/lni-bibtex. Be aware that lni.bst is broken (https://github.com/latextemplates/LNI/issues/1), but still produces a correct bibliography.
+In case you cannot update to the latest version of bibtex (instruction are given below), you find a version using bibtex at https://github.com/latextemplates/LNI/tree/lni-bibtex. Be aware that lni.bst is broken (https://github.com/latextemplates/LNI/issues/1), but still produces a correct bibliography.
 
 ## Quick start
 
@@ -39,20 +39,24 @@ If you do not want to have an updated installation, but fiddle around with dirty
 
 ## Benefits in comparison to GI e.V.'s version
 
-In addition to the [official LNI template], it offers following features:
+The [official LNI template] is updated at <https://github.com/sieversMartin/LNI/>, which is approved by GI and offers following benefits:
 
  * Enables most recent hyphenation patterns for German text
  * Clean copy and paste of ligatures (e.g., "workflow" stays "workflow" after copying from the PDF).
- * Automatic setting of "Fig." and "Section"/"Sect." according to the LNI style. Just use `\Cref{sec:xy}` at the beginning of a sentence and `\cref{sec:xy}` in the middle of a sentence. Thanx to [cleveref].
  * [microtypographic extensions](https://www.ctan.org/pkg/microtype) for a better look of the paper.
  * Support of `\powerset`.
  * Support of hyperlinked references without extra color thanx to [hyperref].
  * Better breaking of URLs.
  * Removed `sty` files: These are provided by all modern LaTeX distributions.
- * Adds modern packages such as [csquotes], [hypcap], [booktabs].
- * Provides a skeletal [paper.tex](paper.tex) file.
- * Support of [biblatex]
+ * Adds modern packages such as [hypcap].
+ * Provides a skeletal [lni-author-template.tex](https://github.com/sieversMartin/LNI/blob/master/lni-author-template.tex) file demonstrating the template.
 
+In addition, this template offers following benefits:
+
+ * Automatic setting of "Fig." and "Section"/"Sect." according to the LNI style. Just use `\Cref{sec:xy}` at the beginning of a sentence and `\cref{sec:xy}` in the middle of a sentence. Thanx to [cleveref].
+ * Adds modern packages such as [csquotes] and [booktabs].
+ * Provides a skeletal [paper.tex](paper.tex) file demonstrating cleveref and booktabs.
+ * Support of [biblatex].
 
 ## Tool hints
 
