@@ -18,54 +18,6 @@
 \usepackage[math]{blindtext}
 
 
-%% Begin: Biblatex
-%% Aims: No errors, when bibtexing; UTF8 in bibliography; enablement of \citet{key}
-
-%for easy quotations: \enquote{text}
-%also required by biblatex
-\usepackage{csquotes}
-\usepackage[
-  backend=biber, % UTF-8 support
-  style=LNI,     % The GI style - see https://www.ctan.org/pkg/biblatex-lni
-  natbib=true    % Requried for \Citet
-]{biblatex}
-
-% Enable hyperlinked authors when using \citeauthor
-% Source: http://tex.stackexchange.com/a/75916/9075
-\DeclareCiteCommand{\citeauthor}
-  {\boolfalse{citetracker}%
-   \boolfalse{pagetracker}%
-   \usebibmacro{prenote}}
-  {\ifciteindex
-     {\indexnames{labelname}}
-     {}%
-   \printtext[bibhyperref]{\printnames{labelname}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-
-%If you want to quickly reuse an existing bibliography:
-
-\iffalse
-\AtEveryBibitem{%
-  \ifentrytype{article}{%
-  }{%
-    \clearfield{doi}%
-    \clearfield{issn}%
-    \clearfield{url}%
-    \clearfield{urldate}%
-  }%
-  \ifentrytype{inproceedings}{%
-  }{%
-    \clearfield{doi}%
-    \clearfield{issn}%
-    \clearfield{url}%
-    \clearfield{urldate}%
-  }%
-}
-\fi
-%% End: Biblatex
-
-
 %% Begin: Cleveref
 %% Aim: Include reference type in reference. Use \cref{fig:xy} instead of Fig.~\ref{fig:xy}
 
@@ -169,10 +121,6 @@ See \href{https://www.ctan.org/pkg/microtype}{microtype} in action here:
 
 \subsection{Literaturverzeichnis}
 Der letzte Abschnitt zeigt ein beispielhaftes Literaturverzeichnis für Bücher mit einem Autor \cite{Ez10} und zwei AutorInnen \cite{AB00}, einem Beitrag in Proceedings mit drei AutorInnen \cite{ABC01}, einem Beitrag in einem LNI Band mit mehr als drei AutorInnen \cite{Az09}, zwei Bücher mit den jeweils selben vier AutorInnen im selben Erscheinungsjahr \cite{Wa14} und \cite{Wa14b}, ein Journal \cite{Gl06}, eine Website \cite{GI14} bzw.\ anderweitige Literatur ohne konkrete AutorInnenschaft \cite{XX14}.
-\todo{Es wird biblatex verwendet, da es UTF8 sauber unterstützt und im Gegensatz zu lni.bst keine Fehler beim bibtexen auftreten.}
-
-Referenzen sollten nicht direkt als Subjekt eingebunden werden, sondern immer nur durch Authorenanganben:
-Beispiel: \commentontext{\Citet{AB00}}{Großes C bei Citet, wenn es am Satzanfang steht. Analog zu Cref.} geben ein Beispiel, aber auch \citet{Az09}.
 
 Formatierung und Abkürzungen werden für die Referenzen \texttt{book}, \texttt{inbook}, \texttt{proceedings}, \texttt{inproceedings}, \texttt{article}, \texttt{online} und \texttt{misc} automatisch vorgenommen.
 Mögliche Felder für Referenzen können der Beispieldatei \texttt{paper.bib} entnommen werden.
