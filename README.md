@@ -39,6 +39,7 @@ In addition, this template offers following benefits:
  * Provides a skeletal [paper.tex](paper.tex) file demonstrating cleveref and booktabs.
 
 ## Tool hints
+
 Grammar and spell checking is available at [TeXstudio].
 Please download [LanguageTool] and [configure Texstudio to use it](http://wiki.languagetool.org/checking-la-tex-with-languagetool#toc4).
 Note that it is enough to point to `languagetool.jar`.
@@ -49,18 +50,13 @@ If TeXstudio doesn't fit your needs, check [the list of all available LaTeX Edit
 ## Using the template with your git repository
 
 ### Initialization
-This howto assumes that you don't have a git repository for your paper yet.
-If you have, just add https://github.com/latextemplates/LNI.git as upstream and merge the branch `template` into your `master` branch.
 
-1. Open command line
-1. `git clone https://github.com/latextemplates/LNI.git`
-1. `cd LNI`
-1. `git remote rename origin upstream`
-1. `git checkout -b master`
+1. Initialize a git repository for your paper
+2. `git remote add template https://github.com/latextemplates/LNI.git`
 
-After that you can use and push the `master` branch as usual.
-Notes on syncing with the upstream repository [are available from GitHub](https://help.github.com/articles/syncing-a-fork/).
-Note that we decided to call the upstream branch `template` to have a clear distinction between the real content (maintained in your `master` branch) and the template (maintained in the `template` branch).
+## Updating
+
+Just execute `git pull -Xtheirs template lni-bibtex`
 
 ## Links
 
