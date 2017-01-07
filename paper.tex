@@ -110,6 +110,27 @@ Vorname1 Nachname1 und Vorname2 Nachname2}
   style=LNI
 ]{biblatex}
 
+%If you want to quickly reuse an existing bibliography:
+
+\iffalse
+\AtEveryBibitem{%
+  \ifentrytype{article}{%
+  }{%
+    \clearfield{doi}%
+    \clearfield{issn}%
+    \clearfield{url}%
+    \clearfield{urldate}%
+  }%
+  \ifentrytype{inproceedings}{%
+  }{%
+    \clearfield{doi}%
+    \clearfield{issn}%
+    \clearfield{url}%
+    \clearfield{urldate}%
+  }%
+}
+\fi
+
 % new packages BEFORE hyperref
 % See also http://tex.stackexchange.com/questions/1863/which-packages-should-be-loaded-after-hyperref-instead-of-before
 
