@@ -44,7 +44,10 @@
 \DeclareOption*{\ClassWarning{Option `\CurrentOption` is not supported!}}
 \ProcessOptions\relax
 
+\iflnienglish
+\else
 \RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
+\fi
 \LoadClass[10pt,twoside,a4paper,fleqn]{article}
 \RequirePackage{cmap}
 \RequirePackage{inputenc}
@@ -109,7 +112,7 @@
 \def\@@title[#1]#2{\gdef\@shorttitle{#1}\gdef\@title{#2}}
 
 \renewcommand{\author}{\@dblarg\@@author}
-\def\@@author[#1]#2{\gdef\@shortauthor{{\let\footnote\@gobble\def\and{\unskip\ \andname\ }#1}}\gdef\@author{#2}}
+\def\@@author[#1]#2{\gdef\@shortauthor{{\let\footnote\@gobble\def\and{\unskip,\ }#1}}\gdef\@author{#2}}
 
 \newcommand*{\email}[1]{{\urlstyle{same}\protect\url{#1}}}
 
@@ -177,7 +180,7 @@
 }{\endquotation}
 
 \newenvironment{keywords}{\fontsize{9}{10}\selectfont
-    \noindent{\bfseries Keywords:}}{}
+    \noindent{\bfseries Keywords:\ }}{}
 
 \renewcommand{\section}{\@startsection{section}{1}{\z@}%
   {-16\p@ \@plus -4\p@ \@minus -4\p@}{5\p@ \@plus 4\p@ \@minus 4\p@}{\fontsize{12}{14}\fontseries{b}\selectfont}}
@@ -226,6 +229,8 @@
                 \@dblfloat{table}}
                {\end@dblfloat}
 
+\RequirePackage[font=small]{caption}
+
 \setlength{\mathindent}{0.5cm}
 
 \RequirePackage{verbatim}
@@ -259,6 +264,7 @@
        \setlength{\parsep}{-2pt}}%
        %\setlength{\itemindent}{0.5cm}
   \fi}
+\renewcommand\labelitemi{$\bullet$}
 
   % Nummierierte Aufzählung
   \renewcommand{\labelenumii}{\alph{enumii})}
@@ -282,7 +288,6 @@
 
 \renewenvironment{thebibliography}[1]
      {\iflnienglish\selectlanguage{english}\else\selectlanguage{ngerman}\fi
-      \inputencoding{latin1}
       \section*{\refname}%
       \bgroup\fontsize{9}{10}\selectfont
       \list{\@biblabel{\@arabic\c@enumiv}}%
@@ -300,7 +305,7 @@
       \sfcode`\.\@m}
      {\def\@noitemerr
        {\@latex@warning{Empty `thebibliography' environment}}%
-      \endlist\egroup\inputencoding{utf8}}
+      \endlist\egroup}
 
 \RequirePackage{graphicx}
 \RequirePackage{fancyhdr}
@@ -338,6 +343,7 @@
 }%
 \fancypagestyle{plain}{%
    \fancyhead{} % Löscht alle Kopfzeileneinstellungen
+   \fancyhead[LE]{\small\@editor~(Hrsg.):\ \@booktitle,\linebreak\hspace{0.05cm}\thepage\hspace{5pt} Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn~\@year}
    \fancyhead[RO]{\small\@editor~(Hrsg.):\ \@booktitle,\linebreak Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn~\@year \hspace{5pt}\thepage\hspace{0.05cm}}
    \fancyfoot{} % Löscht alle Fußzeileneinstellungen
    \renewcommand{\headrulewidth}{0.4pt} %Linie unter Kopfzeile
@@ -360,13 +366,12 @@
    %%%breaklinks=true,% set by hyperref based on driver
    colorlinks=true,%
    allcolors=black,%
-   pdfpagelayout=TwoPageRight,%
    pdfstartview=Fit%
 }
 \fi
 \RequirePackage[all]{hypcap}
 
-\def\and{\unskip\,}
+\def\and{\unskip\hspace{-.42em},\hspace{.6em}}
 
 \iflnienglish
    \bibliographystyle{lni}
