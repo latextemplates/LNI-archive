@@ -1,48 +1,82 @@
-% LaTeX Dokumentenklasse f¸r die LNI Reihe der GI
-%
-% (C) 2002 Robert Tolksdorf
-% Im Fall von Fragen zu dieser Dokumentenklasse wenden Sie sich bitte an mail@robert-tolksdorf.de
-% ‹berarbeitung auf Version 0.5 im M‰rz 2010 von Judith Michael, Alpen-Adria-Universit‰t Klagenfurt
-%
-%
-\ProvidesClass{lni}[2010/03/01 v0.5]
-
-%\newif\ifpdf\ifx\pdfoutput\undefined\pdffalse\else\pdfoutput=1\pdftrue\fi
-
-% Satzspiegelposition gem‰ﬂ LNI-Herausgeberrichtlinien (Korrektur von Thomas.Kuehne@mcs.vuw.ac.nz)
+%%
+%% This is file `lni.cls',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% lni.dtx  (with options: `class')
+%% -------:| -----------------------------------------------------------------
+%%     lni:| A class for submissions to the ``Lecture Notes in Informatics''
+%%  Author:| Martin Sievers
+%%   Email:| martin.sievers@schoenerpublizieren.de
+%% License:| Released under the LaTeX Project Public License v1.3c or later
+%%     See:| http://www.latex-project.org/lppl.txt
+%% 
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\ProvidesClass{lni}
+    [2016/07/04 v1.0 A class for submissions to the ``Lecture Notes in Informatics'']
 \setlength{\hoffset}{-0,2cm}% correct left margin to 4.2cm
 \setlength{\voffset}{2.60cm}% correct top margin to 5.25cm
+\def\@clearglobaloption#1{%
+  \def\@tempa{#1}%
+  \def\@tempb{\@gobble}%
+  \@for\next:=\@classoptionslist\do
+    {\ifx\next\@tempa
+       \message{Cleared  option \next\space from global list}%
+     \else
+       \edef\@tempb{\@tempb,\next}%
+     \fi}%
+  \let\@classoptionslist\@tempb
+  \expandafter\ifx\@tempb\@gobble
+    \let\@classoptionslist\@empty
+  \fi}
 
-% Vielen Dank an Matthias Rust (mrust@rostock.zgdv.de) fuer folgende
-% Ausrichtung an LNI Satzspiegel
-%\DeclareOption{forInclusion}{%
-%  \setlength{\topmargin}{0mm}%
-%  \setlength{\headheight}{0mm}%
-%  \setlength{\headsep}{0mm}%
-%  \setlength{\hoffset}{-10,9mm}% 
-%  \setlength{\voffset}{-3,9mm}% 
-%  \setlength{\oddsidemargin}{0mm}%
-%  \setlength{\evensidemargin}{0mm}%
-%  \setlength{\paperheight}{235mm}%
-%  \setlength{\paperwidth}{155mm}
-%  \ifpdf%
-%    \setlength{\pdfpageheight}{235mm}%
-%    \setlength{\pdfpagewidth}{155mm}%
-%  \fi}
+\DeclareOption{latin1}{\PassOptionsToPackage{latin1}{inputenc}}
+\DeclareOption{utf8}{\PassOptionsToPackage{utf8}{inputenc}}
+\DeclareOption{ansinew}{\PassOptionsToPackage{ansinew}{inputenc}}
+\newif\iflnienglish
+\lnienglishfalse
+\DeclareOption{english}{\lnienglishtrue\@clearglobaloption{english}}
+\newif\ifusehyperref
+\usehyperreftrue
+\DeclareOption{nohyperref}{\usehyperreffalse}
+\ExecuteOptions{utf8}
+\DeclareOption*{\ClassWarning{Option `\CurrentOption` is not supported!}}
+\ProcessOptions\relax
 
-\newif\iflnienglish\lnienglishfalse
-\DeclareOption{english}{\lnienglishtrue}
+\iflnienglish
+\else
+\RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
+\fi
+\LoadClass[10pt,twoside,a4paper,fleqn]{article}
+\RequirePackage{cmap}
+\RequirePackage{inputenc}
+\RequirePackage[T1]{fontenc}
 
-\ProcessOptions
+\iflnienglish
+   \RequirePackage[ngerman,english]{babel}
+\else
+   \RequirePackage[english,ngerman]{babel}
+\fi
 
-% 10 pt, A4, Seitenabst‰nde
-\LoadClass[10pt,twoside, a4paper, fleqn]{article}
-\RequirePackage[english,ngerman]{babel}
-\iflnienglish\selectlanguage{english}\def\bbl@main@language{english}\fi
-% Blocksatz durch LaTeX-Default
-
-
-% Satzspiegel
+\RequirePackage{newtxtext}
+\RequirePackage{newtxmath}
+\RequirePackage[zerostyle=b,straightquotes]{newtxtt}
+\RequirePackage[final,tracking=smallcaps,expansion=alltext,protrusion=true]{microtype}%
+\SetTracking{encoding=*,shape=sc}{50}%
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\DeclareFontFamily{U}{MnSymbolC}{}
+\DeclareSymbolFont{MnSyC}{U}{MnSymbolC}{m}{n}
+\DeclareFontShape{U}{MnSymbolC}{m}{n}{
+    <-6>  MnSymbolC5
+   <6-7>  MnSymbolC6
+   <7-8>  MnSymbolC7
+   <8-9>  MnSymbolC8
+   <9-10> MnSymbolC9
+  <10-12> MnSymbolC10
+  <12->   MnSymbolC12%
+}{}
+\DeclareMathSymbol{\powerset}{\mathord}{MnSyC}{180}
 \setlength{\textheight}{19.2cm}
 \setlength{\textwidth}{12.6cm}
 \setlength{\topmargin}{0.17cm}%
@@ -50,11 +84,9 @@
 \setlength{\evensidemargin}{1.85cm}% korrigierte twoside werte
 \setlength{\headsep}{0.31cm}%
 
-% Ragged bottom - verhindert die Ausdehnung der Seite = Ver‰nderung der Abst‰nde
 \def\thisbottomragged{\def\@textbottom{\vskip\z@ plus.0001fil
 \global\let\@textbottom\relax}}
 
-%Seitenzahlen - Grˆﬂe der Box
 \renewcommand\@pnumwidth{3em}
 \renewcommand\@tocrmarg{3.5em}
 \def\@dottedtocline#1#2#3#4#5{%
@@ -75,31 +107,27 @@
      \hb@xt@\@pnumwidth{\hfil\normalfont \normalcolor #5}%
      \par}%
   \fi}
-  
-\frenchspacing    % Abstand nach Satzende
-\widowpenalty=10000   % Vermeidet "widows & orphans"
-\clubpenalty=10000
 
+\renewcommand{\title}{\@dblarg\@@title}
+\def\@@title[#1]#2{\gdef\@shorttitle{#1}\gdef\@title{#2}}
 
-% Times als Grundschrift
-\RequirePackage{mathptmx} 
-%Times New Roman PS MT durch Distiller Einstellungen
+\renewcommand{\author}{\@dblarg\@@author}
+\def\@@author[#1]#2{\gdef\@shortauthor{{\let\footnote\@gobble\def\and{\unskip,\ }#1}}\gdef\@author{#2}}
 
-% Title: Kopie aus article.cls mit anderem \thispagestyle
-\renewcommand\maketitle{\par
-%Keine Vertikale Einr¸ckung ¸ber dem Titel auf der Titelseite
-%\changepage{0mm}{0mm}{0mm}{0mm}{0mm}{0.56cm}{0mm}{0mm}{0mm}  
+\newcommand*{\email}[1]{{\urlstyle{same}\protect\url{#1}}}
+
+\renewcommand\maketitle{\par%
 \begingroup
     \renewcommand\thefootnote{\@arabic\c@footnote}%
-    \def\@makefnmark% keine Einr¸ckung der Fuﬂnoten eingestellt
-		 {\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
-		 \long\def\@makefntext##1{%
-		 \@setpar{\@@par
-		 \@tempdima = \hsize
-		 \advance\@tempdima -1em
-		 \parshape \@ne 0.15cm \@tempdima}%
-		 \par\parindent 0.3cm \noindent
-		 \hb@xt@\z@{\hss\@textsuperscript{\normalfont\@thefnmark}\,}##1}
+    \def\@makefnmark% keine Einr√ºckung der Fu√ünoten eingestellt
+ {\@textsuperscript{\normalfont\@thefnmark}}%
+ \long\def\@makefntext##1{%
+ \@setpar{\@@par
+ \@tempdima = \hsize
+ \advance\@tempdima -1em
+ \parshape \@ne 0.15cm \@tempdima}%
+ \par\parindent 0.3cm \noindent
+ \hb@xt@\z@{\hss\@textsuperscript{\normalfont\@thefnmark}\,}##1}
     \if@twocolumn
       \ifnum \col@number=\@ne
         \@maketitle
@@ -111,9 +139,9 @@
       \global\@topnum\z@   % Prevents figures from going at top of page.
       \@maketitle
     \fi
-    \thispagestyle{fancy}\@thanks   %keine Kopfzeile auf der ersten Seite
+    \thispagestyle{plain}
+    \@thanks
   \endgroup
-  \setcounter{footnote}{0}%
   \global\let\thanks\relax
   \global\let\maketitle\relax
   \global\let\@maketitle\relax
@@ -130,50 +158,42 @@
 \def\@maketitle{%
   \newpage
   \null
-  \begin{flushleft}%
+  \begin{center}%
   \vskip -24pt% Abstand vor dem Titel
-  \let \footnote \thanks
+  \raggedright % Linksb√ºndig
+  \let\footnote\thanks
     {\fontsize{14}{17}\fontseries{b}\selectfont \@title \par}%
     \vskip 19pt% Abstand nach dem Titel
     {\fontsize{10}{12}\selectfont
       \lineskip .5em%
-
         \@author
       \par}%
-    \vskip 28pt%Abstand vor dem Abstract
-  \end{flushleft}%
+    \vskip 28pt% Abstand vor dem Abstract
+  \end{center}%
   \par
-  }
+}
 
-% Abstract
 \renewenvironment*{abstract}{%
  \renewcommand{\abstractname}{Abstract}
  \fontsize{9}{10}\selectfont
     \noindent{\bfseries \abstractname:}%
-}{\endquotation}  
+}{\endquotation}
 
-% Keywords
 \newenvironment{keywords}{\fontsize{9}{10}\selectfont
-    \noindent{\bfseries Keywords:}}{}
-%\def\keywordsname{{\bf Key words:}}
+    \noindent{\bfseries Keywords:\ }}{}
 
-% ‹berschriften
 \renewcommand{\section}{\@startsection{section}{1}{\z@}%
   {-16\p@ \@plus -4\p@ \@minus -4\p@}{5\p@ \@plus 4\p@ \@minus 4\p@}{\fontsize{12}{14}\fontseries{b}\selectfont}}
-%  {19pt}{8pt}{\fontsize{12}{14}\fontseries{b}\selectfont}}
 \renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
   {-16\p@ \@plus -4\p@ \@minus -4\p@}{8\p@ \@plus 4\p@ \@minus 4\p@}{\fontsize{10}{12}\fontseries{b}\selectfont}}
-%  {16pt}{4pt}{\fontsize{10}{12}\fontseries{b}\selectfont}}
-% weitere nicht durch Formatvorlage gekl‰rt
 
-% Bildunterschriften
 \setlength{\abovecaptionskip}{4pt}%Abstand vor der Bildunterschrift
-\setlength{\belowcaptionskip}{0cm}%Abstand nach der Bildunterschrift
+\setlength{\belowcaptionskip}{0pt}%Abstand nach der Bildunterschrift
 \setlength{\intextsep}{6pt}%Abstand nach der Grafik
 \long\def\@makecaption#1#2{%
   \vskip\abovecaptionskip
-  {\fontsize{5}{6}\selectfont
-   \sbox\@tempboxa{#1: #2}%
+  {%\fontsize{5}{6}\selectfont
+   \sbox\@tempboxa{\small#1: #2}%
   \ifdim \wd\@tempboxa >\hsize
     #1: #2\par
   \else
@@ -182,23 +202,20 @@
   \fi}
   \vskip\belowcaptionskip}
 
-%Abbildungen
-%\def\fps@figure{htbp} %default parameter for floats - disabled to have floats placed at the top or the bottom of the page automatically
-\def\fnum@figure{\figurename\thinspace\thefigure}
-\def \@floatboxreset {%
+\def\fps@figure{htbp}
+\def\fnum@figure{\figurename~\thefigure}
+\def\@floatboxreset{%
         \reset@font
         \small
         \@setnobreak
         \@setminipage
 }
-%see also http://tex.stackexchange.com/a/39020/9075, http://people.cs.uu.nl/piet/floats/node1.html, and http://tex.stackexchange.com/a/35130/9075
-\setcounter{totalnumber}{5} %Maximal 5 Gleitobjekte auf einer Seite
-\renewcommand{\topfraction}{1.0}%Anteil den gleitende Objekte am Seitenanfang einnehmen d¸rfen
-\renewcommand{\bottomfraction}{1.0}%Anteil den gleitende Objekte am Seitenende einnehmen d¸rfen
-\renewcommand{\textfraction}{0.05} %Minimaler Anteil an Text auf einer Seite. Default: 0.2
+\setcounter{topnumber}{10}% maximale Anzahl gleitender Objekte am Seitenanfang
+\setcounter{bottomnumber}{10}% maximale Anzahl gleitender Objekte am Seitenende
+\renewcommand{\topfraction}{1.0}% Anteil den gleitende Objekte am Seitenanfang einnehmen d√ºrfen
+\renewcommand{\bottomfraction}{1.0}% Anteil den gleitende Objekte am Seitenende einnehmen d√ºrfen
 
-%Tabellen
-%\def\fps@table{htbp}
+\def\fps@table{htbp}
 \def\fnum@table{\tablename~\thetable}
 \renewcommand{\arraystretch}{1.1}%Abstand zu Linien in Tabelle
 \renewenvironment{table}
@@ -212,17 +229,13 @@
                 \@dblfloat{table}}
                {\end@dblfloat}
 
-% gleichungen mit richtiger einr¸ckung, 0.5cm
-% fleqn-Option oben
+\RequirePackage[font=small]{caption}
+
 \setlength{\mathindent}{0.5cm}
 
-% listings mit richtiger einr¸ckung, 0.5 cm
 \RequirePackage{verbatim}
 \def\verbatim@processline{\hskip0.5cm\the\verbatim@line\par}
 
-
-
-% Fussnoten mit 5cm Linie und richtiger Grˆﬂe
 \renewcommand\footnoterule{%
   \kern-3\p@
   \hrule\@width 5cm
@@ -231,39 +244,35 @@
   \fnindent0.18cm
 \long\def\@makefntext#1{%
     \parindent \fnindent%
-    \leftskip \fnindent% Einr¸ckung vor der footnotemark
+    \leftskip \fnindent% Einr√ºckung vor der footnotemark
     \noindent
     \llap{\hb@xt@0.10cm{\hss\@makefnmark\ }}\ignorespaces#1}
 
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
 
-% Absatzeinz¸ge und Abst‰nde
-\parindent0pt
-\parskip 8pt
-
-%Aufz‰hlungen
-%mit Punkt
 \renewcommand*\itemize{%
   \ifnum \@itemdepth >\thr@@\@toodeep\else
-  	\setlength{\labelsep}{0.70cm}%Abstand zum Aufz‰hlungspunkt
+   \setlength{\labelsep}{0.70cm}%Abstand zum Aufz√§hlungspunkt
     \advance\@itemdepth\@ne
-    \edef\@itemitem{labelitem\romannumeral\the\@itemdepth}%   
+    \edef\@itemitem{labelitem\romannumeral\the\@itemdepth}%
     \expandafter
-    \list  
+    \list
       \csname\@itemitem\endcsname
       {\def\makelabel##1{\hss\llap{##1}}%
        \setlength{\itemsep}{8pt}%
        \setlength{\parsep}{-2pt}}%
        %\setlength{\itemindent}{0.5cm}
-       
   \fi}
-  
-  %Nummierierte Aufz‰hlung
+\renewcommand\labelitemi{$\bullet$}
+
+  % Nummierierte Aufz√§hlung
   \renewcommand{\labelenumii}{\alph{enumii})}
-  \renewcommand*\enumerate{%    
+  \renewcommand*\enumerate{%
   \ifnum \@enumdepth >\thr@@
       \@toodeep
     \else
-		\setlength{\labelsep}{0.70cm}%Abstand zur Aufz‰hlungsnummer      
+\setlength{\labelsep}{0.70cm}%Abstand zur Aufz√§hlungsnummer
       \advance\@enumdepth \@ne
       \edef\@enumctr{enum\romannumeral\the\@enumdepth}%
     \fi
@@ -272,18 +281,13 @@
     \expandafter\list\csname label\@enumctr\endcsname{%
       \usecounter{\@enumctr}%
       \def\makelabel##1{\hss\llap{##1}}
-		\setlength{\labelsep}{0.6cm} %Einr¸ckung des Aufz‰hlungszeichens     
+\setlength{\labelsep}{0.6cm} %Einr√ºckung des Aufz√§hlungszeichens
       \setlength{\itemsep}{8pt}%
-       \setlength{\parsep}{-2pt}}
-       }
+      \setlength{\parsep}{-2pt}}
+  }
 
-
-
-% bibliography
-\iflanguage{english}{\bibliographystyle{lni}}{\bibliographystyle{lnig}}
-%\renewcommand{\figurename}{Fig.}
 \renewenvironment{thebibliography}[1]
-     {%\def\refname{Literaturverzeichnis}
+     {\iflnienglish\selectlanguage{english}\else\selectlanguage{ngerman}\fi
       \section*{\refname}%
       \bgroup\fontsize{9}{10}\selectfont
       \list{\@biblabel{\@arabic\c@enumiv}}%
@@ -302,3 +306,102 @@
      {\def\@noitemerr
        {\@latex@warning{Empty `thebibliography' environment}}%
       \endlist\egroup}
+
+\RequirePackage{graphicx}
+\RequirePackage{fancyhdr}
+\RequirePackage{listings}
+\newcommand{\andname}{}
+\addto\captionsngerman{%
+  \renewcommand{\andname}{und}%
+  \renewcommand{\figurename}{Abb.}%
+  \renewcommand{\tablename}{Tab.}%
+  \renewcommand{\lstlistingname}{List.}
+  \renewcommand{\refname}{Literaturverzeichnis}
+}
+
+\addto\captionsenglish{%
+  \renewcommand{\andname}{and}%
+  \renewcommand{\figurename}{Fig.}%
+  \renewcommand{\tablename}{Tab.}%
+  \renewcommand{\lstlistingname}{List.}
+}
+
+\newcommand*{\startpage}[1]{\setcounter{page}{#1}}
+
+\newcommand*{\@booktitle}{}
+\newcommand*{\booktitle}[1]{\renewcommand{\@booktitle}{#1}}
+
+\newcommand*{\@editor}{}
+\newcommand*{\editor}[1]{\renewcommand{\@editor}{#1}}
+
+\AtBeginDocument{%
+   \let\@rigyear\year
+   \newcommand*{\@year}{\the\@rigyear}
+   \renewcommand*{\year}[1]{%
+      \renewcommand{\@year}{#1}%
+   }%
+}%
+\fancypagestyle{plain}{%
+   \fancyhead{} % L√∂scht alle Kopfzeileneinstellungen
+   \fancyhead[LE]{\small\@editor~(Hrsg.):\ \@booktitle,\linebreak\hspace{0.05cm}\thepage\hspace{5pt} Lecture Notes in Informatics (LNI), Gesellschaft f√ºr Informatik, Bonn~\@year}
+   \fancyhead[RO]{\small\@editor~(Hrsg.):\ \@booktitle,\linebreak Lecture Notes in Informatics (LNI), Gesellschaft f√ºr Informatik, Bonn~\@year \hspace{5pt}\thepage\hspace{0.05cm}}
+   \fancyfoot{} % L√∂scht alle Fu√üzeileneinstellungen
+   \renewcommand{\headrulewidth}{0.4pt} %Linie unter Kopfzeile
+}
+
+\pagestyle{fancy}
+\fancyhead{} % L√∂scht alle Kopfzeileneinstellungen
+\fancyhead[RO]{\small\@shorttitle\hspace{5pt}\thepage\hspace{0.05cm}}
+\fancyhead[LE]{\hspace{0.05cm}\small\thepage\hspace{5pt}\@shortauthor}
+\fancyfoot{} % L√∂scht alle Fu√üzeileneinstellungen
+\renewcommand{\headrulewidth}{0.4pt} %Linie unter Kopfzeile
+
+\RequirePackage{url}
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+
+\ifusehyperref
+\RequirePackage[pdfusetitle]{hyperref}
+\hypersetup{%
+   bookmarks=false,%
+   %%%breaklinks=true,% set by hyperref based on driver
+   colorlinks=true,%
+   allcolors=black,%
+   pdfstartview=Fit%
+}
+\fi
+\RequirePackage[all]{hypcap}
+
+\def\and{\unskip\hspace{-.42em},\hspace{.6em}}
+
+\iflnienglish
+   \bibliographystyle{lni}
+\else
+   \bibliographystyle{lnig}
+\fi
+
+\frenchspacing    % Abstand nach Satzende
+\widowpenalty=10000   % Vermeidet "widows & orphans"
+\clubpenalty=10000
+%% 
+%% Copyright (C) 2016 by Martin Sievers <martin.sievers@schoenerpublizieren.de>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License (LPPL), either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in the file:
+%% 
+%% http://www.latex-project.org/lppl.txt
+%% 
+%% This work is "maintained" (as per LPPL maintenance status) by
+%% Martin Sievers.
+%% 
+%% This work consists of the file  lni.dtx
+%%                                 lni.ins
+%%                                 README.md
+%%           and the derived files lni.pdf
+%%                                 lni.cls
+%%                                 lni-author-template.tex
+%%                                 lni.bst
+%%                                 lnig.bst
+%%
+%% End of file `lni.cls'.
