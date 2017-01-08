@@ -18,6 +18,11 @@ In case, your LaTeX installation is uptodate, it is recommended to switch to htt
 
 [latexmk] currently does not work, because of https://github.com/latextemplates/LNI/issues/1.
 
+## Trouble shooting
+
+* `! pdfTeX error (font expansion): auto expansion is only possible with scalable fonts.` -> Install the `cm-super` package using the MiKTeX package manager. Then, run `initexmf --mkmaps` on the command line. (Long description: http://tex.stackexchange.com/a/324972/9075)
+* `! LaTeX Error: Command \openbox already defined.`: Insert `\let\openbox\relax` beore `\usepackage{amsthm}`
+
 ## Benefits in comparison to GI e.V.'s version
 
 The [official LNI template] is updated at <https://github.com/sieversMartin/LNI/>, which is approved by GI and offers following benefits:
