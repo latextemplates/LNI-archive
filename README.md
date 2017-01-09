@@ -63,6 +63,22 @@ If TeXstudio doesn't fit your needs, check [the list of all available LaTeX Edit
 
 Just execute `git pull -Xtheirs template lni-bibtex`
 
+## Space saving techniques
+
+**These are not officially approved!**
+
+```
+\newlength{\bibitemsep}\setlength{\bibitemsep}{.2\baselineskip plus .05\baselineskip minus .05\baselineskip}
+\newlength{\bibparskip}\setlength{\bibparskip}{0pt}
+\let\oldthebibliography\thebibliography
+\renewcommand\thebibliography[1]{%
+  \oldthebibliography{#1}
+  \setlength{\parskip}{\bibitemsep}%
+  \setlength{\itemsep}{\bibparskip}%
+}
+```
+
+
 ## Links
 
  * Other templates: http://latextemplates.github.io/
