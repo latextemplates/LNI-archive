@@ -62,9 +62,9 @@
 \RequirePackage{newtxtext}
 \RequirePackage{newtxmath}
 \RequirePackage[zerostyle=b,straightquotes,scaled=.9]{newtxtt}
-\RequirePackage[final,tracking=smallcaps,expansion=alltext,protrusion=true]{microtype}%
-\SetTracking{encoding=*,shape=sc}{50}%
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\RequirePackage[]{microtype}%
+%\SetTracking{encoding=*,shape=sc}{50}%
+%\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 \DeclareFontFamily{U}{MnSymbolC}{}
 \DeclareSymbolFont{MnSyC}{U}{MnSymbolC}{m}{n}
 \DeclareFontShape{U}{MnSymbolC}{m}{n}{
