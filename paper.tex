@@ -92,15 +92,24 @@
 %% Begin: pdfcomment
 %% Aim: enable nice comments by \todo{...}
 
-\usepackage{xcolor}
-\usepackage{pdfcomment}
-\newcommand{\commentontext}[2]{\colorbox{yellow!60}{#1}\pdfcomment[color={0.234 0.867 0.211},hoffset=-6pt,voffset=10pt,opacity=0.5]{#2}}
-\newcommand{\commentatside}[1]{\pdfcomment[color={0.045 0.278 0.643},icon=Note]{#1}}
+%% IF YOU USE THIS, DISABLE IT FOR THE FINAL VERSION - it changes the placement of the headings of on pages 2..end
 
-%compatibality with TODO package
-\newcommand{\todo}[1]{\commentatside{#1}}
+%\usepackage{xcolor}
+%\usepackage{pdfcomment}
+%\newcommand{\commentontext}[2]{\colorbox{yellow!60}{#1}\pdfcomment[color={0.234 0.867 0.211},hoffset=-6pt,voffset=10pt,opacity=0.5]{#2}}
+%\newcommand{\commentatside}[1]{\pdfcomment[color={0.045 0.278 0.643},icon=Note]{#1}}
+
+%compatibality with todonotes package
+%\newcommand{\todo}[1]{\commentatside{#1}}
+%compatibility with package fixmetodonotes
+%\newcommand{\TODO}[1]{\commentatside{#1}}
 %% End: pdfcomment
 
+% If you change this to todonotes, keep in mind that it changes the positioning of the headings on pages 2 onwards.
+% So, disable todonotes upon final submission.
+% This does not happen when using fixmetodonotes, so this package is used.
+% Documentation available at http://texdoc.net/texmf-dist/doc/latex/fixmetodonotes/README
+\usepackage{fixmetodonotes}
 
 % correct bad hyphenation here
 \hyphenation{net-works semi-conduc-tor}
@@ -172,10 +181,11 @@ See \href{https://www.ctan.org/pkg/microtype}{microtype} in action here:
 
 \subsection{Literaturverzeichnis}
 Der letzte Abschnitt zeigt ein beispielhaftes Literaturverzeichnis für Bücher mit einem Autor \cite{Ez10} und zwei AutorInnen \cite{AB00}, einem Beitrag in Proceedings mit drei AutorInnen \cite{ABC01}, einem Beitrag in einem LNI Band mit mehr als drei AutorInnen \cite{Az09}, zwei Bücher mit den jeweils selben vier AutorInnen im selben Erscheinungsjahr \cite{Wa14} und \cite{Wa14b}, ein Journal \cite{Gl06}, eine Website \cite{GI14} bzw.\ anderweitige Literatur ohne konkrete AutorInnenschaft \cite{XX14}.
-\todo{Es wird biblatex verwendet, da es UTF8 sauber unterstützt und im Gegensatz zu lni.bst keine Fehler beim bibtexen auftreten.}
+\TODO{Es wird biblatex verwendet, da es UTF8 sauber unterstützt und im Gegensatz zu lni.bst keine Fehler beim bibtexen auftreten.}
 
 Referenzen sollten nicht direkt als Subjekt eingebunden werden, sondern immer nur durch Authorenanganben:
-Beispiel: \commentontext{\Citet{AB00}}{Großes C bei Citet, wenn es am Satzanfang steht. Analog zu Cref.} geben ein Beispiel, aber auch \citet{Az09}.
+Beispiel: \Citet{AB00} geben ein Beispiel, aber auch \citet{Az09}.
+Hinweis: Großes C bei Citet, wenn es am Satzanfang steht. Analog zu Cref.
 
 Formatierung und Abkürzungen werden für die Referenzen \texttt{book}, \texttt{inbook}, \texttt{proceedings}, \texttt{inproceedings}, \texttt{article}, \texttt{online} und \texttt{misc} automatisch vorgenommen.
 Mögliche Felder für Referenzen können der Beispieldatei \texttt{paper.bib} entnommen werden.
