@@ -61,10 +61,10 @@
 
 \RequirePackage{newtxtext}
 \RequirePackage{newtxmath}
-\RequirePackage[zerostyle=b,straightquotes]{newtxtt}
-\RequirePackage[final,tracking=smallcaps,expansion=alltext,protrusion=true]{microtype}%
-\SetTracking{encoding=*,shape=sc}{50}%
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\RequirePackage[zerostyle=b,straightquotes,scaled=.9]{newtxtt}
+\RequirePackage[]{microtype}%
+%\SetTracking{encoding=*,shape=sc}{50}%
+%\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 \DeclareFontFamily{U}{MnSymbolC}{}
 \DeclareSymbolFont{MnSyC}{U}{MnSymbolC}{m}{n}
 \DeclareFontShape{U}{MnSymbolC}{m}{n}{
@@ -344,7 +344,7 @@
 \fancypagestyle{plain}{%
    \fancyhead{} % Löscht alle Kopfzeileneinstellungen
    \fancyhead[LE]{\small\@editor~(Hrsg.):\ \@booktitle,\linebreak\hspace{0.05cm}\thepage\hspace{5pt} Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn~\@year}
-   \fancyhead[RO]{\small\@editor~(Hrsg.):\ \@booktitle,\linebreak Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn~\@year \hspace{5pt}\thepage\hspace{0.05cm}}
+   \fancyhead[RO]{\small\@editor~(Hrsg.):\ \@booktitle,\hspace{0.000001pt}\null\linebreak Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn~\@year \hspace{5pt}\thepage\hspace{0.05cm}}
    \fancyfoot{} % Löscht alle Fußzeileneinstellungen
    \renewcommand{\headrulewidth}{0.4pt} %Linie unter Kopfzeile
 }
