@@ -22,6 +22,8 @@ In case, your LaTeX installation is uptodate, it is recommended to switch to htt
 
 * `! pdfTeX error (font expansion): auto expansion is only possible with scalable fonts.` -> Install the `cm-super` package using the MiKTeX package manager. Then, run `initexmf --mkmaps` on the command line. (Long description: http://tex.stackexchange.com/a/324972/9075)
 * `! LaTeX Error: Command \openbox already defined.`: Insert `\let\openbox\relax` beore `\usepackage{amsthm}`
+* `! Undefined control sequence. l.84 \ulp@afterend`. Remove `paper.aux` and recompile.
+* `! Package xkeyval Error: `family_i' undefined in families `blx@opt@namepart'.`: You switched from bibtex to biblatex. Remove `paper.bbl` and rempile.
 
 ## Benefits in comparison to GI e.V.'s version
 
