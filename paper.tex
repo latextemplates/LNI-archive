@@ -1,0 +1,265 @@
+% Currently this document is written in English
+% !TeX spellcheck = en_US
+
+%Ensure that all odl school LaTeX habits are remarked
+\RequirePackage[l2tabu, orthodox]{nag}
+
+%German: remove "english"
+\documentclass[english,utf8]{lni}
+
+%diagonal lines in a table - http://tex.stackexchange.com/questions/17745/diagonal-lines-in-table-cell
+%slashbox is not available in texlive (due to licensing) and also gives bad results. Thus, we use diagbox
+%\usepackage{diagbox}
+
+% Nice tables using \toprule, \midrule, \bottomrule
+\usepackage{booktabs}
+
+%for demonstration purposes only
+\usepackage[math]{blindtext}
+
+
+%% Begin: Biblatex
+%% Aims: No errors, when bibtexing; UTF8 in bibliography; enablement of \citet{key}
+
+%for easy quotations: \enquote{text}
+%also required by biblatex
+\usepackage{csquotes}
+\usepackage[
+  backend=biber, % UTF-8 support
+  style=LNI,     % The GI style - see https://www.ctan.org/pkg/biblatex-lni
+  natbib=true    % Requried for \Citet
+]{biblatex}
+\bibliography{paper}
+
+% Enable hyperlinked authors when using \citeauthor
+% Source: http://tex.stackexchange.com/a/75916/9075
+\DeclareCiteCommand{\citeauthor}
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\ifciteindex
+     {\indexnames{labelname}}
+     {}%
+   \printtext[bibhyperref]{\printnames{labelname}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+%If you want to quickly reuse an existing bibliography:
+
+\iffalse
+\AtEveryBibitem{%
+  \ifentrytype{article}{%
+  }{%
+    \clearfield{doi}%
+    \clearfield{issn}%
+    \clearfield{url}%
+    \clearfield{urldate}%
+  }%
+  \ifentrytype{inproceedings}{%
+  }{%
+    \clearfield{doi}%
+    \clearfield{issn}%
+    \clearfield{url}%
+    \clearfield{urldate}%
+  }%
+}
+\fi
+%% End: Biblatex
+
+
+%% Begin: Cleveref
+%% Aim: Include reference type in reference. Use \cref{fig:xy} instead of Fig.~\ref{fig:xy}
+
+\iflnienglish
+\usepackage[capitalise,nameinlink]{cleveref}
+\crefname{section}{Sect.}{Sect.}
+\Crefname{section}{Sect.}{Sect.}
+\else
+\usepackage[ngerman,capitalise,nameinlink]{cleveref}
+\fi
+
+\crefname{figure}{\figurename}{\figurename}
+\Crefname{figure}{\figurename}{\figurename}
+
+\crefname{listing}{\lstlistingname}{\lstlistingname}
+\Crefname{listing}{\lstlistingname}{\lstlistingname}
+
+\crefname{table}{\tablename}{\tablename}
+\Crefname{table}{\tablename}{\tablename}
+%% End: Cleveref
+
+
+%% Begin: pdfcomment
+%% Aim: enable nice comments by \todo{...}
+
+%% IF YOU USE THIS, DISABLE IT FOR THE FINAL VERSION - it changes the placement of the headings of on pages 2..end
+
+%\usepackage{xcolor}
+%\usepackage{pdfcomment}
+%\newcommand{\commentontext}[2]{\colorbox{yellow!60}{#1}\pdfcomment[color={0.234 0.867 0.211},hoffset=-6pt,voffset=10pt,opacity=0.5]{#2}}
+%\newcommand{\commentatside}[1]{\pdfcomment[color={0.045 0.278 0.643},icon=Note]{#1}}
+
+%compatibality with todonotes package
+%\newcommand{\todo}[1]{\commentatside{#1}}
+%compatibility with package fixmetodonotes
+%\newcommand{\TODO}[1]{\commentatside{#1}}
+%% End: pdfcomment
+
+% Documentation available at http://texdoc.net/texmf-dist/doc/latex/fixmetodonotes/README
+% Alternative packages: todonotes and pdfcomment
+% This offers \TODO and \FIXME
+\usepackage{fixmetodonotes}
+
+% correct bad hyphenation here
+\hyphenation{net-works semi-conduc-tor}
+
+
+
+%%% Adapt to your needs from here
+
+%Beginn der Seitenzählung für diesen Beitrag
+%Wird für die Druckfassung angepasst
+\startpage{1}
+
+\editor{Vorname Nachname et al.}
+\booktitle{Konferenztitel}
+
+\author[Vorname1 Nachname1 \and Vorname2 Nachname2]{
+Vorname1 Nachname1\footnote{Einrichtung/Universität, Abteilung, Anschrift, Postleitzahl Ort, \email{emailadresse@author1}} \and
+Vorname2 Nachname2\footnote{Einrichtung/Universität, Abteilung, Anschrift, Postleitzahl Ort, \email{emailadresse@author2}} \and
+und weitere Autorinnen und Autoren in der gleichen Notation}
+
+\title[Kurztitel für die Kopfzeile]{Der Titel des Beitrags, der auch etwas länger sein und über zwei Zeilen reichen kann}
+
+\begin{document}
+\maketitle
+
+%Auf Anzahl der AutorInnen setzen, damit die weitere Nummerierung der Fußnoten passt
+%Dieser Befehl \verb|\setcounter{footnote}{2}| legt in dem Fall fest, dass 2 Fußnotennummern bereits für die AutorInnen verbraucht wurden, damit die darauf folgenden Fußnoten mit der richtigen Nummerierung (ab 3) fortfahren. Dieser Wert muss an die jeweilige Zahl an AutorInnen bzw. bereits verbrauchte Fußnoten angepasst werden, sofern im weiteren Verlauf Fußnoten verwendet werden.
+\setcounter{footnote}{2}
+
+\begin{abstract}
+Die \LaTeX-Klasse \texttt{lni} setzt die Layout-Vorgaben für Beiträge in LNI Konferenzbänden um.
+Dieses Dokument beschreibt ihre Verwendung und ist ein Beispiel für die entsprechende Darstellung.
+Der Abstract ist ein kurzer Überblick über die Arbeit der zwischen 70 und 150 Wörtern lang sein und das Wichtigste enthalten sollte.
+Die Formatierung erfolgt automatisch innerhalb des abstract-Bereichs.
+\end{abstract}
+
+\begin{keywords}
+LNI Guidelines, \LaTeX Vorlage. Die Formatierung erfolgt automatisch innerhalb des keywords-Bereichs.
+\end{keywords}
+
+\section{Verwendung}
+Die GI gibt unter \url{http://www.gi-ev.de/LNI} Vorgaben für die Formatierung von Dokumenten in der LNI Reihe.
+Für \LaTeX-Dokumente werden diese durch die Dokumentenklasse \texttt{lni} realisiert.
+
+Dieses Dokument basiert auf der offiziellen Dokumentation und wurde sowohl entsprechend der aktuellen Vorlage und den eingebundenen Paketen aktualisiert.
+Insbesondere wurden die Verbesserungen von Martin Sievers von \url{https://github.com/sieversMartin/LNI} übernommen.
+Die aktuelle Version wird unter \url{https://github.com/latextemplates/LNI} gepflegt.
+Es werden die aktuellen Versionen von der GI eingebunden.
+
+Diese Dokumentation simplifiziert und setzt grundlegendes LaTeX-Wissen voraus.
+Es werden generische Platzhalter an die entsprechenden Stellen (wie beispielsweise die Authoren-Anganben) gesetzt und nicht weiter an anderer Stelle dokumentiert.
+
+Dieses Template ist wie folgt gegliedert:
+\Cref{sec:demos} zeigt Demonstrationen der Verbesserung von GitHub-LNI gegenüber der originalen Vorlage.
+\Cref{sec:lniconformance} zeigt die Einhaltung der Richtlinien durch einfachen Text.
+
+\section{Demonstrationen}
+\label{sec:demos}
+The symbol for powerset is now correct: $\powerset$ and not a Weierstrass p ($\wp$).
+
+Brackets work as designed:
+<test>
+
+See \href{https://www.ctan.org/pkg/microtype}{microtype} in action here:
+\blindtext
+
+\section{Demonstration der Einhaltung der Richtlinien}
+\label{sec:lniconformance}
+
+\subsection{Literaturverzeichnis}
+Der letzte Abschnitt zeigt ein beispielhaftes Literaturverzeichnis für Bücher mit einem Autor \cite{Ez10} und zwei AutorInnen \cite{AB00}, einem Beitrag in Proceedings mit drei AutorInnen \cite{ABC01}, einem Beitrag in einem LNI Band mit mehr als drei AutorInnen \cite{Az09}, zwei Bücher mit den jeweils selben vier AutorInnen im selben Erscheinungsjahr \cite{Wa14} und \cite{Wa14b}, ein Journal \cite{Gl06}, eine Website \cite{GI14} bzw.\ anderweitige Literatur ohne konkrete AutorInnenschaft \cite{XX14}.
+\TODO{Es wird biblatex verwendet, da es UTF8 sauber unterstützt und im Gegensatz zu lni.bst keine Fehler beim bibtexen auftreten.}
+
+Referenzen sollten nicht direkt als Subjekt eingebunden werden, sondern immer nur durch Authorenanganben:
+Beispiel: \Citet{AB00} geben ein Beispiel, aber auch \citet{Az09}.
+Hinweis: Großes C bei Citet, wenn es am Satzanfang steht. Analog zu Cref.
+
+Formatierung und Abkürzungen werden für die Referenzen \texttt{book}, \texttt{inbook}, \texttt{proceedings}, \texttt{inproceedings}, \texttt{article}, \texttt{online} und \texttt{misc} automatisch vorgenommen.
+Mögliche Felder für Referenzen können der Beispieldatei \texttt{paper.bib} entnommen werden.
+Andere Referenzen bzw.\ Felder müssen allenfalls nachträglich angepasst werden.
+
+\subsection{Abbildungen}
+\Cref{fig:demo} zeigt eine Abbildung.
+
+\begin{figure}
+  \centering
+  Hier sollte die Graphik mittels \texttt{includegraphics} eingebunden werden.
+
+  %\includegraphics[width=.8\textwidth]{filename}
+  \caption{Demographik}
+  \label{fig:demo}
+\end{figure}
+
+\subsection{Tabellen}
+\Cref{tab:demo} zeigt eine Tabelle.
+
+\begin{table}
+\centering
+\begin{tabular}{lll}
+\toprule
+Überschriftsebenen & Beispiel & Schriftgröße und -art \\
+\midrule
+Titel (linksbündig) & Der Titel \ldots & 14 pt, Fett\\
+Überschrift 1 & 1 Einleitung & 12 pt, Fett\\
+Überschrift 2 & 2.1 Titel & 10 pt, Fett\\
+\bottomrule
+\end{tabular}
+\caption{Die Überschriftsarten}
+\label{tab:demo}
+\end{table}
+
+\subsection{Programmcode}
+Die LNI-Formatvorlage verlangt die Einrückung von Listings vom linken Rand.
+In der \texttt{lni}-Dokumentenklasse ist dies für die \texttt{verbatim}-Umgebung realisiert.
+
+\begin{verbatim}
+public class Hello { 
+    public static void main (String[] args) { 
+        System.out.println("Hello World!"); 
+    } 
+} 
+\end{verbatim}
+
+Alternativ kann auch die \texttt{lstlisting}-Umgebung verwendet werden.
+
+\Cref{L1} zeigt uns ein Beispiel, das mit Hilfe der \texttt{lstlisting}-Umgebung realisiert ist.
+
+\lstset{basicstyle=\ttfamily}
+\begin{lstlisting} [captionpos=b, caption=Beschreibung, label=L1, xleftmargin=0.5cm]
+public class Hello { 
+    public static void main (String[] args) { 
+        System.out.println("Hello World!"); 
+    } 
+}
+\end{lstlisting}
+
+\subsection{Formeln und Gleichungen}
+
+Die korrekte Einrückung und Nummerierung für Formeln ist bei den Umgebungen \texttt{equation} und \texttt{eqnarray} gewährleistet.
+
+\begin{equation}
+  1=4-3
+\end{equation}
+und
+\begin{eqnarray}
+  2=7-5\\
+  3=2-1
+\end{eqnarray}
+
+%No \bibliography{paper} allowed here - biblatex expects it at the preamble
+%Run `biber paper` to generate the bibliography
+\printbibliography
+
+\end{document}
