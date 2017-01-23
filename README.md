@@ -105,6 +105,9 @@ Just execute `git pull -Xtheirs template master`
 ## Links
 
  * Other templates: http://latextemplates.github.io/
+ * German: Neue TeX-FAQ: http://texfragen.de/
+ * Visual FAQ: Typesetting issues and a link to the FAQ: http://mirrors.ctan.org/info/visualFAQ/visualFAQ.pdf
+ * LaTeX FAQs: https://www.dante.de/FAQ.html
 
   [LNI]: https://www.gi.de/service/publikationen/lni/autorenrichtlinien.html
   [official LNI template]: https://www.gi.de/fileadmin/redaktion/Autorenrichtlinien/LNI-LaTeX-Vorlage.zip
