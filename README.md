@@ -20,9 +20,9 @@ It is proven with the proceedings of [BTW 2017](http://btw2017.informatik.uni-st
 
 ## Quick start
 
- * Click on `Download ZIP` or [here](https://github.com/latextemplates/LNI/archive/master.zip).
- * Extract master.zip in the folder where you want to write your paper.
- * Edit the paper
+* Click on `Download ZIP` or [here](https://github.com/latextemplates/LNI/archive/master.zip).
+* Extract master.zip in the folder where you want to write your paper.
+* Edit the paper
   * Option A: Edit [paper.tex](paper.tex).
   * Option B: Edit [paper-bibtex.tex](paper-bibtex.tex).
   * Option C: Edit [lni-author-template.tex](lni-author-template.tex).
