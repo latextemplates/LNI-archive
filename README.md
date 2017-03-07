@@ -5,15 +5,15 @@ This README is best viewed in a markdown viewer or [on GitHub](https://github.co
 
 ## Three starting options
 
-* **Option A**: Use biblatex and a template with examples. This is the most modern.
+* **Option A**: Use a template with examples and biblatex. This is the most modern option.
   * [biblatex](https://github.com/plk/biblatex#overview) (at least 3.5),
   * [biber](https://github.com/plk/biber#overview) (at least 2.6), and
   * [biblatex-lni](https://github.com/latextemplates/biblatex-lni/blob/master/README.md#biblatex-lni) for the bibliography
-* **Option B**: Use bibtex and a template with examples.
-  This is recommended in case you cannot update to the latest version of bibtex (instruction are given below).
+* **Option B**: Use a template with examples and bibtex.
+  This is recommended in case you cannot update to the latest version of biblatex (instruction are given below).
   Be aware that lni.bst is broken (https://github.com/latextemplates/LNI/issues/1), but still produces a correct bibliography.
-* **Option C**: Use bibtex and a template without content.
-  This is the default distributed with the LNI style.
+* **Option C**: Use a template without content and bibtex.
+  This is the default distributed with the [LNI style](https://github.com/sieversMartin/LNI/).
 
 All three options produce valid results to be submitted to conferences and workshops requring LNI.
 It is proven with the proceedings of [BTW 2017](http://btw2017.informatik.uni-stuttgart.de/).
@@ -23,22 +23,22 @@ It is proven with the proceedings of [BTW 2017](http://btw2017.informatik.uni-st
 * Click on `Download ZIP` or [here](https://github.com/latextemplates/LNI/archive/master.zip).
 * Extract master.zip in the folder where you want to write your paper.
 * Edit the paper
-  * Option A: Edit [paper.tex](paper.tex).
-  * Option B: Edit [paper-bibtex.tex](paper-bibtex.tex).
-  * Option C: Edit [lni-author-template.tex](lni-author-template.tex).
+  * For Option A: Edit [paper.tex](paper.tex).
+  * For Option B: Edit [paper-bibtex.tex](paper-bibtex.tex).
+  * For Option C: Edit [lni-author-template.tex](lni-author-template.tex).
 * Make the paper. You can use your usual build system.
-  * Option A: `latexmk paper`. See [latexmk] for more information.
+  * For Option A: `latexmk paper`. See [latexmk] for more information.
     If you want to have continuous preview, execute `latexmk -pvc paper`.
-  * Option B: `pdflatex paper-bibtex`, `bibtex paper-bibtex`, ignore the errors,  `pdflatex paper-bibtex`,  `pdflatex paper-bibtex`
-  * Option B: `pdflatex lni-author-template`, `bibtex lni-author-template`, ignore the errors,  `pdflatex lni-author-template`,  `pdflatex lni-author-template`.
+  * For Option B: `pdflatex paper-bibtex`, `bibtex paper-bibtex`, ignore the errors,  `pdflatex paper-bibtex`,  `pdflatex paper-bibtex`
+  * For Option C: `pdflatex lni-author-template`, `bibtex lni-author-template`, ignore the errors,  `pdflatex lni-author-template`,  `pdflatex lni-author-template`.
 
 ## Trouble shooting
 
-* `! pdfTeX error (font expansion): auto expansion is only possible with scalable fonts.` -> Install the [cm-super] package using the MiKTeX package manager. Then, run `initexmf --mkmaps` on the command line. (Long description: http://tex.stackexchange.com/a/324972/9075)
-* `! LaTeX Error: Command \openbox already defined.` -> Insert `\let\openbox\relax` beore `\usepackage{amsthm}`
+* `! pdfTeX error (font expansion): auto expansion is only possible with scalable fonts.` -> Install the [cm-super] package using the MiKTeX package manager. Then, run `initexmf --mkmaps` on the command line. (Long description: <http://tex.stackexchange.com/a/324972/9075>.)
+* `! LaTeX Error: Command \openbox already defined.` -> Insert `\let\openbox\relax` before `\usepackage{amsthm}`
 * `! Undefined control sequence. l.84 \ulp@afterend` -> Remove `paper.aux` and recompile.
 * `! Package xkeyval Error: `family_i' undefined in families `blx@opt@namepart'.` -> You switched from bibtex to biblatex. Remove `paper.bbl` and recompile.
-* Option A: biber/biblatex too old -> see installation hints of how to update them at different systems.
+* When choosing Option A: biber/biblatex too old -> see installation hints of how to update them at different systems.
 
 ## Installation hints for Windows
 
@@ -66,7 +66,7 @@ It is proven with the proceedings of [BTW 2017](http://btw2017.informatik.uni-st
 
 ## Installation hints for Ubuntu
 
-Option A: Ubuntu currently [ships biber 2.4](https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1589644), so you have to upgrade your texlive distribution.
+When using Option A: Ubuntu currently [ships biber 2.4](https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1589644), so you have to upgrade your texlive distribution.
 The easiest way is to uninstall the ubuntu package and use [install-tl-ubuntu](https://github.com/scottkosty/install-tl-ubuntu).
 Then, you can follow the instructions given at http://tex.stackexchange.com/a/55459/9075 to update your tex live distribution.
 If you do not want to have an updated installation, but fiddle around with dirty patching your installation, please follow  http://tex.stackexchange.com/questions/84624/how-to-upgrade-biblatex-properly.
