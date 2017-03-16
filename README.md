@@ -66,10 +66,11 @@ It is proven with the proceedings of [BTW 2017](http://btw2017.informatik.uni-st
 
 ## Installation hints for Ubuntu
 
-When using Option A: Ubuntu currently [ships biber 2.4](https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1589644), so you have to upgrade your texlive distribution.
-The easiest way is to uninstall the ubuntu package and use [install-tl-ubuntu](https://github.com/scottkosty/install-tl-ubuntu).
-Then, you can follow the instructions given at http://tex.stackexchange.com/a/55459/9075 to update your tex live distribution.
-If you do not want to have an updated installation, but fiddle around with dirty patching your installation, please follow  http://tex.stackexchange.com/questions/84624/how-to-upgrade-biblatex-properly.
+When using Option A and B: Ubuntu currently [ships biber 2.4](https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1589644), so you have to upgrade your TeX Live distribution. There are at least three options for upgrading TeX Live:
+
+* Use the repository `ppa:jonathonf/texlive-2016` and [upgrade via apt-get](http://askubuntu.com/questions/794671/upgrading-tex-live-from-2015-to-2016-on-ubuntu-16-04-lts).
+* Uninstall the ubuntu package and use [install-tl-ubuntu](https://github.com/scottkosty/install-tl-ubuntu). Then, you can follow the instructions given at http://tex.stackexchange.com/a/55459/9075 to update your TeX Live distribution.
+* If you do not want to have an updated installation, but fiddle around with dirty patching your installation, please follow  http://tex.stackexchange.com/questions/84624/how-to-upgrade-biblatex-properly.
 
 ## Benefits of Option B in comparison to Option C
 
@@ -120,7 +121,7 @@ Just execute `git pull -Xtheirs template master`
   [hypcap]: https://www.ctan.org/pkg/hypcap
   [hyperref]: https://ctan.org/pkg/hyperref
   [microtype]: https://ctan.org/pkg/microtype
-  
+
   [latexmk]: https://www.ctan.org/pkg/latexmk/
 
   [Chocolatey]: https://chocolatey.org/
